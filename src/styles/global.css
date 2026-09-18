@@ -38,5 +38,14 @@
   .header nav { order: 3; width: 100%; }
 }
 @media (max-width: 800px) {
-  .theme-control { align-self: flex-end; margin-block: 4px 8px; }
+  .header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px 12px;
+  }
+  .header .brand { grid-column: 1; grid-row: 1; font-size: 14px; gap: 8px; }
+  .header .brand-sub, .theme-label { display: none; }
+  .header nav { grid-column: 1 / -1; grid-row: 2; }
+  .theme-control { grid-column: 2; grid-row: 1; justify-self: end; }
 }

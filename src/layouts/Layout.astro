@@ -29,7 +29,7 @@ const is404 = Astro.url.pathname.startsWith('/404');
     <header class="header wrap">
       <a href="/" class="brand" aria-label="StormForge 首页"><span class="monogram" aria-hidden="true">SF</span>STORMFORGE<span class="brand-sub">TOOLKIT</span></a>
       <nav aria-label="主导航">{links.map(([url, label]) => <a href={url} aria-current={Astro.url.pathname === url ? 'page' : undefined}>{label}</a>)}</nav>
-      <label class="theme-control" hidden>外观
+      <label class="theme-control" hidden><span class="theme-label">外观</span>
         <select id="theme-select" aria-label="颜色主题">
           <option value="system">跟随系统</option>
           <option value="light">浅色</option>
