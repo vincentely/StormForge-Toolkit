@@ -1,0 +1,12 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="本地游戏内容工作流" description="StormForge 为本地合法安装的游戏提供资源索引、模型预览与 SFM 导出工作流。查看产品能力、集成兼容范围和公开发行状态。">
+  <section class="hero">
+    <div><p class="eyebrow">STORMFORGE / LOCAL GAME TOOLING</p><h1>从本地资源，<br />到创作工作流。</h1><p class="lead">在一个工作空间中索引、查找和预览游戏内容。通过中立的 SFM 格式，衔接 Unity 与 Unreal Engine 的资产导入流程。</p><div class="actions"><a class="button primary" href="/features/">了解产品能力 <span aria-hidden="true">&nbsp;↗</span></a><a class="button" href="/docs/">阅读入门文档</a></div><p class="fine">公开发行准备中 · <a href="/download/">查看下载状态</a></p></div>
+    <aside class="workflow" aria-label="产品工作流程"><div class="label"><span>LOCAL WORKFLOW</span><span>01 — 03</span></div><div class="step"><span>01</span><div><h3>连接本地游戏</h3><p>读取合法安装的受支持游戏，由你启动索引。</p></div></div><div class="step"><span>02</span><div><h3>查找与预览</h3><p>浏览资产目录，检查模型、材质和动画。</p></div></div><div class="step"><span>03</span><div><h3>导出到引擎工作流</h3><p>保留完整 SFM 文件与依赖，交由对应插件导入。</p></div></div></aside>
+  </section>
+  <section class="section"><div class="section-heading"><h2>围绕资产工作的每一步</h2><p>已核实的上游能力，公开版本另行发布。</p></div><div class="grid"><article class="feature"><span class="number">01 / ORGANIZE</span><h3>让资源可以被找到</h3><p>本地目录索引与搜索，结合收藏、集合和资源检查信息，组织你的浏览工作。</p></article><article class="feature"><span class="number">02 / INSPECT</span><h3>先看清，再继续</h3><p>模型、骨骼动画及材质预览。不同游戏和资源格式有各自的支持范围与限制。</p></article><article class="feature"><span class="number">03 / CONNECT</span><h3>连接引擎中的创作</h3><p>SFM 0.99 交换格式承载模型与依赖，面向 Unity 和 Unreal 的原生资产导入。</p></article></div></section>
+  <section class="section"><div class="section-heading"><h2>引擎集成</h2><a href="/docs/#integrations">兼容范围与安装说明 ↗</a></div><div class="integrations"><article class="integration"><span class="tag">公开快照待授权</span><h3 style="margin-top:20px">Unity</h3><p>上游目标：Unity 2022.3 · URP 14.0.12<br />SFM Importer 1.2.0</p><a href="/docs/#unity">查看集成说明 →</a></article><article class="integration"><span class="tag">公开快照待授权</span><h3 style="margin-top:20px">Unreal Engine</h3><p>上游目标：Unreal Engine 5.8.1 · Win64<br />StormForge SFM 0.99.0 · Beta</p><a href="/docs/#unreal">查看集成说明 →</a></article></div></section>
+  <section class="section boundary"><h2>本地内容，<br />清晰的使用边界。</h2><p>StormForge 不分发原游戏资源。你需要合法拥有并安装受支持的游戏，并自行确认内容使用、导出和再分发的授权。第三方游戏和引擎名称仅用于说明兼容范围，不表示其厂商认可或背书。</p></section>
+</Layout>

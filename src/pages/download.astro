@@ -1,0 +1,9 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { readChannel } from '../../scripts/manifest.mjs';
+const channels = [{ id: 'stable', label: '稳定版' }, { id: 'beta', label: '测试版' }].map(c => ({ ...c, manifest: readChannel(c.id) }));
+---
+<Layout title="下载与版本" description="查看 StormForge 公开发行状态。每个正式下载均提供版本、大小、来源提交与 SHA-256 校验。">
+<header class="page-head"><p class="eyebrow">DOWNLOADS</p><h1>下载之前，<br />先确认版本与来源。</h1><p class="lead">正式发行包由 StormForge 私有上游构建、测试和签名。本页仅展示经过校验的公开发行清单。</p></header>
+<div class="prose">{channels.map(({ label, manifest }) => <section class="release-card"><h2 style="margin-top:0">{label}</h2>{manifest ? <><p>版本 {manifest.version} · <time datetime={manifest.published_at}>{manifest.published_at}</time></p><a href={manifest.release_notes_url}>版本说明</a>{manifest.artifacts.map((a: {filename: string; platform: string; architecture: string; size_bytes: number; sha256: string; source_commit: string; primary_url: string; github_url: string}) => <article><h3>{a.filename}</h3><dl><dt>平台</dt><dd>{a.platform} / {a.architecture}</dd><dt>文件大小</dt><dd>{a.size_bytes.toLocaleString('zh-CN')} 字节</dd><dt>SHA-256</dt><dd><code>{a.sha256}</code></dd><dt>来源提交</dt><dd><code>{a.source_commit}</code></dd></dl><div class="actions"><a class="button primary" href={a.primary_url}>下载</a><a class="button" href={a.github_url}>GitHub 镜像</a></div></article>)}</> : <><span class="tag">尚未公开发布</span><p style="margin-top:16px">当前没有经过验证的公开{label}安装包或发行清单。完成上游发行验证后，这里会提供真实下载及完整校验信息。</p></>}</section>)}<h2>确认文件完整性</h2><p>下载后应核对字节大小与 SHA-256。任何差异都应停止安装。插件下载同样需要来源版本和公开许可证，当前尚未开放。</p><a href="/docs/">查看校验与安装步骤 →</a></div>
+</Layout>

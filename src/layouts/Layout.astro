@@ -1,0 +1,38 @@
+---
+import '../styles/global.css';
+interface Props { title: string; description: string }
+const { title, description } = Astro.props;
+const links = [['/', '概览'], ['/features/', '功能'], ['/download/', '下载'], ['/docs/', '入门文档']];
+const is404 = Astro.url.pathname.startsWith('/404');
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · StormForge</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#111519" />
+    {!is404 && <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />}
+    {is404 && <meta name="robots" content="noindex" />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={`${title} · StormForge`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site)} />
+  </head>
+  <body>
+    <a class="skip" href="#main">跳至正文</a>
+    <header class="header wrap">
+      <a href="/" class="brand" aria-label="StormForge 首页"><span class="monogram" aria-hidden="true">SF</span>STORMFORGE<span class="brand-sub">TOOLKIT</span></a>
+      <nav aria-label="主导航">{links.map(([url, label]) => <a href={url} aria-current={Astro.url.pathname === url ? 'page' : undefined}>{label}</a>)}</nav>
+    </header>
+    <main id="main" class="wrap"><slot /></main>
+    <footer class="wrap footer">
+      <div><a href="/" class="footer-brand">STORMFORGE</a><p>面向本地游戏内容的工具工作流。</p><p class="fine">不分发原游戏资源。用户须合法拥有并安装受支持的游戏。</p></div>
+      <div class="footer-links"><a href="/privacy/">隐私政策</a><a href="/terms/">用户协议</a><a href="/contact/">联系方式</a><a href="https://github.com/vincentely/StormForge-Toolkit">GitHub</a></div>
+      <div class="legal-status">官网预览 · 尚未开放公开稳定版下载<br />运营主体、备案信息及隐私联系方式待核实，暂不用于微信审核。</div>
+    </footer>
+  </body>
+</html>

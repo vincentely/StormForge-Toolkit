@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="入门文档" description="StormForge 的环境要求、本地游戏索引、SFM 导出，以及 Unity 与 Unreal Engine 集成说明。">
+<header class="page-head"><p class="eyebrow">GETTING STARTED</p><h1>从本地安装开始。</h1><p class="lead">以下流程依据上游分发文档整理。当前没有经过验证的公开稳定包，请先查看下载状态。</p></header>
+<div class="prose"><h2>准备环境</h2><ul><li>Windows 10 / 11 x64，支持 Direct3D 12 的显卡与当前驱动。</li><li>合法拥有并在本机安装受支持的游戏，确认对应内容的使用权利。</li><li>Editor 需要有效账号会话及相应能力授权；当前正式配置仅声明 GitHub 登录，本文不承诺微信登录已开放。</li></ul><h2>首次使用</h2><ol><li>取得经验证的正式包后，先核对大小和 SHA-256，再完整解压。</li><li>从解压目录运行 <code>Start-StormForge.cmd</code>，不要单独移动 EXE。</li><li>完成账号验证后，检查 Game Sources，并显式执行索引；发现游戏安装不等于自动索引。</li><li>在 Asset Browser 中查找资产，等待预览加载完成。</li><li>在 Inspector 的 <code>Model / Scene Export</code> 区域选择 <code>Export Selected</code>。默认导出至包目录下的 <code>output/SFM/</code>。</li></ol><p>索引、缩略图和用户状态保存在本机生成的数据中。不要将游戏资源、数据库或导出内容提交到公开问题报告。</p>
+<h2 id="integrations">引擎集成</h2><div class="notice"><p>以下版本来自上游元数据与分发说明。插件的公开许可证及对应正式 Release 尚未确认，本仓库目前不提供插件源码或安装包。</p></div>
+<h3 id="unity">Unity · Importer 1.2.0</h3><p>目标版本为 Unity 2022.3、URP 14.0.12，依赖 Newtonsoft JSON 包 3.2.1。取得经过授权的正式插件后，将 <code>com.stormforge.unity</code> 放入项目 <code>Packages/</code>，或通过 Package Manager 的 Add package from disk 选择 package.json。</p><p>把完整 SFM 资产目录放入 <code>Assets/</code>，选择 .sfm 触发导入。运行时使用已导入的原生资产，不直接解析 SFM。其他引擎版本未在此承诺支持。</p><h3 id="unreal">Unreal Engine · StormForge SFM 0.99.0</h3><p>上游严格限定 Unreal Engine 5.8.1、Windows 编辑器 / Win64 Runtime 和 SFM 0.99，插件元数据标记为 Beta。取得授权的正式插件后，将 StormForgeSfm 放入项目的 <code>Plugins/</code> 并启用、重启编辑器。源码包需要 Visual Studio 2022 C++ 游戏开发组件与 Windows SDK，由用户本地的 UnrealBuildTool 编译。</p><p>从 Content Browser 导入 .sfm，完整保留其 buffers/ 和 textures/ 侧文件；不要单独复制 manifest。上游打包器不提供预编译 UE DLL。不同 UE 小版本或补丁版本需要独立重建和验证。</p><h2>校验下载</h2><p>与对应发行清单比较字节大小与完整小写 SHA-256。任何不匹配都应停止安装并重新取得可信文件。</p><pre><code>Get-Item .\下载的文件 | Select-Object Length
+(Get-FileHash .\下载的文件 -Algorithm SHA256).Hash.ToLowerInvariant()</code></pre><p><a href="/download/">查看发行状态</a> · <a href="/contact/">报告问题</a></p></div>
+</Layout>

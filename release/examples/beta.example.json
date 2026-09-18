@@ -1,0 +1,16 @@
+{
+  "schema": "stormforge.release.v1",
+  "channel": "beta",
+  "version": "0.0.0-example.1",
+  "published_at": "2026-01-01T00:00:00Z",
+  "release_notes_url": "https://example.invalid/releases/example",
+  "artifacts": [{
+    "kind": "toolkit", "platform": "windows", "architecture": "x64",
+    "filename": "StormForge-0.0.0-example.1-windows-x64.zip",
+    "size_bytes": 1,
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "primary_url": "https://example.invalid/StormForge-0.0.0-example.1-windows-x64.zip",
+    "github_url": "https://example.invalid/StormForge-0.0.0-example.1-windows-x64.zip",
+    "source_commit": "0000000000000000000000000000000000000000"
+  }]
+}
