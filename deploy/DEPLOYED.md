@@ -1,4 +1,26 @@
-# 当前网站部署：开物有方
+# 当前网站部署：正式公开上线
+
+2026-10-20（Asia/Shanghai），用户明确授权网站正式上线。地址：https://stormforge.vollagames.com/。
+
+- 源码提交：`c85a8dabdccc`。
+- 静态包：`stormforge-site-c85a8dabdccc.tar.gz`，24080 字节。
+- SHA-256：`16b8971f4fdad4cbac30d56d373dee00802ab7df26ff8545c2fc4f2ab0968d5a`。
+- current → `/srv/stormforge-site/releases/c85a8dabdccc`。
+- 上一版本：`/srv/stormforge-site/releases/caa3b42d1190`，保留供回滚。
+- 配置与探测回执备份：`/var/backups/stormforge-site/20261019T162706Z-c85a8dabdccc`（服务器 UTC）。
+- nginx 配置当前 SHA-256：`161157430f16eb94f7f3946330aa8452f1469b185ce0e12295fd96d37f71d6ae`。
+
+移除网站内部测试标签与所有正常网页 robots noindex；仅 404 错误页保留 noindex。新增允许抓取的 robots.txt 与包含 7 个正式网页的 sitemap.xml。首页调整留白、能力分栏、介绍文案与移动排版，隐私/使用说明限定在实际网站范围。保留默认跟随系统的主题选择、真实备案、邮箱与产品发行状态。
+
+现网 nginx 只删除静态 location 下的 X-Robots-Tag 行，没有覆盖配置模板；API、OAuth、beta、开发验证 include 与 TLS 均保留。服务器只接收本地静态产物，不构建源码。
+
+验证：Astro check 无诊断；14 项测试、131 项内部链接、56 项主题/尺寸组合、21 项页面/尺寸检查、键盘与 200% 文字检查通过。服务器全部 7 页、图标、主题脚本、robots 与 sitemap 为 200；正式/beta health 为 200 JSON，两个无 state OAuth callback 均为 400 HTML，部署前后一致。外网 9 个网页/索引路径为 200 且无 noindex，sitemap 含 7 个 URL，首页字节哈希与本地相同；桌面与手机浏览器通过。截图：本地 artifacts/visual/public-live-desktop.png、public-live-mobile.png。
+
+回滚：以临时链接 + 原子重命名恢复上一版本 current，同时从上述备份恢复 stormforge.conf，再 nginx -t 成功后 reload；这会恢复原内部测试收录设置。不得覆盖其他后续运维变更。
+
+---
+
+# 2026-10-20 品牌更新部署（历史记录）
 
 更新日期：2026-10-20（Asia/Shanghai）。线上地址：https://stormforge.vollagames.com/。
 
