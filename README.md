@@ -5,7 +5,7 @@
 备案：**浙ICP备2023045009号-2**（[工信部备案查询](https://beian.miit.gov.cn/)）；联系邮箱：dev@vollagames.com。
 本仓库是公开产品与发行面；核心产品仍由私有 StormForge 上游维护。
 
-- 官网目标地址：[stormforge.vollagames.com](https://stormforge.vollagames.com)（本版本用于已授权的内部测试）
+- 官网：[stormforge.vollagames.com](https://stormforge.vollagames.com)
 - [下载页](https://stormforge.vollagames.com/download/)（当前无公开稳定版或测试版）
 - 集成说明：[Unity](integrations/unity/README.md) · [Unreal Engine](integrations/unreal/README.md)
 - [发行规范](release/README.md) · [内容来源](docs/content-sources.md) · [部署说明](deploy/README.md)

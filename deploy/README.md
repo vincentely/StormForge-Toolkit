@@ -1,12 +1,12 @@
 # 现有云服务器静态部署准备
 
-**内部测试部署已获明确授权（2026-09-18）。** 用户提供主体“杭州伏腊科技”和邮箱 dev@vollagames.com，并明确要求备案办理期间先部署测试。当前版本显示内部测试和备案办理中，设置 noindex；不作为微信审核官网。正式公开上线仍需真实产品截图、备案信息及完整隐私/协议资料。服务器为 runtime-only，只接收静态产物；禁止 npm build、CMake、MSBuild、docker build 或任何源码构建。不另建托管平台。
+**2026-10-20 用户已明确授权官网正式上线。** 主体为杭州伏腊科技，备案浙ICP备2023045009号-2，邮箱 dev@vollagames.com。移除内部测试标识与页面/响应头 noindex，提供 robots.txt 和站点地图。产品发行与账号服务政策另行管理。服务器为 runtime-only，仅接收本地构建的静态产物，不执行任何源码构建。
 
 ## 已核对的事实
 
 来源 `984837c730f18459d4e21a86c27f225389deb8c1` 的 `config/editor.dist.json` 将 API 根固定为 `https://stormforge.vollagames.com`。上游 nginx 正式站代理 `https://127.0.0.1:19443`，beta 代理 18443。新配置仅为正式站 `/` 增加静态服务，`/v1/`、`/healthz` 继续代理；已核对两个 OAuth 回调均在 `/v1/oauth/` 下，query 原样保留。beta 整站保持原代理。
 
-`deploy/nginx/stormforge.conf` 是内部测试部署配置，安装前须对比并备份线上版本。保留上游 TLS 1.2、证书路径与 loopback proxy_ssl_verify off，不在这次网站工作中改变 Server TLS 策略。`/srv/stormforge-site` 是建议的新静态目录，需在真实服务器确认无冲突后采用。当前没有独立产品下载目录映射，不承诺不存在的云下载 URL。
+`deploy/nginx/stormforge.conf` 是静态网站配置模板，安装前须对比并备份线上版本。保留上游 TLS 1.2、证书路径与 loopback proxy_ssl_verify off，不在这次网站工作中改变 Server TLS 策略。`/srv/stormforge-site` 是建议的新静态目录，需在真实服务器确认无冲突后采用。当前没有独立产品下载目录映射，不承诺不存在的云下载 URL。
 
 ## 本地 / CI 准备
 
@@ -22,7 +22,7 @@ pnpm package:site
 
 产物仅在被忽略的 artifacts/：`stormforge-site-<12位提交>.tar.gz`、`.sha256`、`.json`，包含版本来源、大小和小写哈希。发布前审阅包内容只含 dist 静态文件。CI 上传 dist 检查 artifact，不部署生产。
 
-## 上传与切换（获得生产授权后）
+## 上传与切换
 
 以下占位参数必须替换为实际经确认值；没有可用服务器凭据时不要运行。仅上传 tar.gz 与 .sha256，不上传仓库、node_modules 或核心产品。
 

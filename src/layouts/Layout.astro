@@ -17,7 +17,7 @@ const is404 = Astro.url.pathname.startsWith('/404');
     <meta name="color-scheme" content="light dark" />
     <script is:inline src="/theme.js"></script>
     {!is404 && <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />}
-    <meta name="robots" content="noindex, nofollow" />
+    {is404 && <meta name="robots" content="noindex" />}
     <link rel="icon" href={site.icon} type="image/png" sizes="108x108" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={`${title} · ${site.name}`} />
@@ -42,10 +42,10 @@ const is404 = Astro.url.pathname.startsWith('/404');
     <main id="main" class="wrap"><slot /></main>
     <footer class="wrap footer">
       <div><a href="/" class="footer-brand">{site.name}</a><p>探索资源，理解结构。</p><p class="fine">StormForge · 本地游戏资源研究与预览工具</p></div>
-      <div class="footer-links"><a href="/privacy/">隐私政策</a><a href="/terms/">用户协议</a><a href="/contact/">联系方式</a><a href="https://github.com/vincentely/StormForge-Toolkit">GitHub</a></div>
+      <div class="footer-links"><a href="/privacy/">隐私说明</a><a href="/terms/">使用说明</a><a href="/contact/">联系方式</a><a href="https://github.com/vincentely/StormForge-Toolkit">GitHub</a></div>
       <div class="legal-status">
         <div class="legal-links"><span>{site.operator}</span><a href={`mailto:${site.email}`}>{site.email}</a><a href={site.icpUrl} target="_blank" rel="noopener noreferrer">{site.icp}</a></div>
-        <p>内部测试 · 产品公开发行准备中。StormForge 不分发原游戏资源。</p>
+        <p>StormForge 不分发原游戏资源。产品版本与获取方式请查看发行页面。</p>
       </div>
     </footer>
   </body>
