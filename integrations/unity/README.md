@@ -10,3 +10,5 @@
 取得未来经授权的正式包后，将 com.stormforge.unity 复制到项目 Packages/，或通过 Package Manager 的 Add package from disk 选择 package.json。将完整 SFM 目录放入 Assets/，保留 .sfmb/.ktx2 依赖并选择 .sfm 导入。运行时使用 Unity 原生资产，不直接解析 SFM。
 
 限制：公开许可证、对应正式 Release、文件哈希清单和公开验证结果尚缺。不得安装不存在的本仓库包，不得引入 Library、Temp、缓存、游戏资源或未经审核的二进制。所有权迁移前仅做正式 Release 发行快照，不在本仓库修改插件功能，不做双向同步。
+
+2026-10-20 元数据复核：上游提交 `494d132a768736a1656d16c9cf50e7dd82c34f50` 的 package.json 版本为 **1.3.0**，声明支持 SFM 0.99 与 required-feature SFM 1.0（SFMB 0.99）；Unity/URP/Newtonsoft 目标未变。此前 1.2.0 记录仅对应初次审计。本仓库仍未导入插件源码，公开发行许可阻塞不变。

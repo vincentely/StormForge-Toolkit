@@ -25,3 +25,6 @@ This license does not grant rights to private StormForge core products,
 integration plugins not included here, third-party dependencies, game assets,
 or trademarks. Separately licensed future integration snapshots must retain
 their own license and provenance.
+
+Product branding artwork in public/images/ is used by the owner's authorization
+and is excluded from this MIT grant. No trademark rights are granted.

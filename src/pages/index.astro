@@ -1,12 +1,54 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { site } from '../site';
 ---
-<Layout title="本地游戏内容工作流" description="StormForge 为本地合法安装的游戏提供资源索引、模型预览与 SFM 导出工作流。查看产品能力、集成兼容范围和公开发行状态。">
+<Layout title="探索资源，理解结构" description="开物有方，StormForge 产品介绍。面向本地合法安装的游戏，提供资源索引、模型与动画预览、材质和来源信息检查，让资源研究更直观。">
   <section class="hero">
-    <div><p class="eyebrow">STORMFORGE / LOCAL GAME TOOLING</p><h1>从本地资源，<br />到创作工作流。</h1><p class="lead">在一个工作空间中索引、查找和预览游戏内容。通过中立的 SFM 格式，衔接 Unity 与 Unreal Engine 的资产导入流程。</p><div class="actions"><a class="button primary" href="/features/">了解产品能力 <span aria-hidden="true">&nbsp;↗</span></a><a class="button" href="/docs/">阅读入门文档</a></div><p class="fine">公开发行准备中 · <a href="/download/">查看下载状态</a></p></div>
-    <aside class="workflow" aria-label="产品工作流程"><div class="label"><span>LOCAL WORKFLOW</span><span>01 — 03</span></div><div class="step"><span>01</span><div><h3>连接本地游戏</h3><p>读取合法安装的受支持游戏，由你启动索引。</p></div></div><div class="step"><span>02</span><div><h3>查找与预览</h3><p>浏览资产目录，检查模型、材质和动画。</p></div></div><div class="step"><span>03</span><div><h3>导出到引擎工作流</h3><p>保留完整 SFM 文件与依赖，交由对应插件导入。</p></div></div></aside>
+    <div>
+      <p class="eyebrow">开物有方 / STORMFORGE</p>
+      <h1>探索资源，<br />理解结构。</h1>
+      <p class="lead">从资源目录到模型、材质与动画，StormForge 帮助你观察本地游戏内容，梳理资源之间的联系，让学习与研究更直观。</p>
+      <div class="actions">
+        <a class="button primary" href="/features/">了解产品功能 <span aria-hidden="true">&nbsp;↗</span></a>
+        <a class="button" href="/docs/">阅读入门文档</a>
+      </div>
+      <p class="fine">只读访问本地来源 · <a href="/download/">查看发行状态</a></p>
+    </div>
+    <aside class="product-summary" aria-label="StormForge 产品介绍">
+      <div class="product-identity">
+        <img src={site.icon} alt="StormForge 产品图标：青色立方体与金色中心" width="108" height="108" fetchpriority="high" />
+        <div><p class="eyebrow">认识我们的产品</p><h2>StormForge</h2><p>游戏资源研究与预览工具</p></div>
+      </div>
+      <dl class="product-facts">
+        <div><dt>连接来源</dt><dd>本机合法安装的受支持游戏</dd></div>
+        <div><dt>观察内容</dt><dd>模型、材质、动画与场景</dd></div>
+        <div><dt>工作方式</dt><dd>只读索引、检查与预览</dd></div>
+      </dl>
+      <p class="fine">Windows 桌面工具 · 公开发行准备中</p>
+    </aside>
   </section>
-  <section class="section"><div class="section-heading"><h2>围绕资产工作的每一步</h2><p>已核实的上游能力，公开版本另行发布。</p></div><div class="grid"><article class="feature"><span class="number">01 / ORGANIZE</span><h3>让资源可以被找到</h3><p>本地目录索引与搜索，结合收藏、集合和资源检查信息，组织你的浏览工作。</p></article><article class="feature"><span class="number">02 / INSPECT</span><h3>先看清，再继续</h3><p>模型、骨骼动画及材质预览。不同游戏和资源格式有各自的支持范围与限制。</p></article><article class="feature"><span class="number">03 / CONNECT</span><h3>连接引擎中的创作</h3><p>SFM 0.99 交换格式承载模型与依赖，面向 Unity 和 Unreal 的原生资产导入。</p></article></div></section>
-  <section class="section"><div class="section-heading"><h2>引擎集成</h2><a href="/docs/#integrations">兼容范围与安装说明 ↗</a></div><div class="integrations"><article class="integration"><span class="tag">公开快照待授权</span><h3 style="margin-top:20px">Unity</h3><p>上游目标：Unity 2022.3 · URP 14.0.12<br />SFM Importer 1.2.0</p><a href="/docs/#unity">查看集成说明 →</a></article><article class="integration"><span class="tag">公开快照待授权</span><h3 style="margin-top:20px">Unreal Engine</h3><p>上游目标：Unreal Engine 5.8.1 · Win64<br />StormForge SFM 0.99.0 · Beta</p><a href="/docs/#unreal">查看集成说明 →</a></article></div></section>
-  <section class="section boundary"><h2>本地内容，<br />清晰的使用边界。</h2><p>StormForge 不分发原游戏资源。你需要合法拥有并安装受支持的游戏，并自行确认内容使用、导出和再分发的授权。第三方游戏和引擎名称仅用于说明兼容范围，不表示其厂商认可或背书。</p></section>
+  <section class="section" aria-labelledby="capabilities">
+    <div class="section-heading"><h2 id="capabilities">让每一次观察，都有所发现。</h2><p>从找到资源，到看清细节。</p></div>
+    <div class="grid">
+      <article class="feature"><span class="number">01 / DISCOVER</span><h3>找到想研究的资源</h3><p>连接本地游戏来源，通过索引、搜索与筛选浏览资源目录，用收藏和集合整理关注的内容。</p></article>
+      <article class="feature"><span class="number">02 / OBSERVE</span><h3>看清模型与动作</h3><p>在预览窗口中观察模型、材质和骨骼动画，调整取景与显示参数，检查不同资源的表现。</p></article>
+      <article class="feature"><span class="number">03 / UNDERSTAND</span><h3>理解来源与结构</h3><p>查看来源格式、资源引用和相关信息，结合诊断结果区分已支持的内容与当前限制。</p></article>
+    </div>
+  </section>
+  <section class="section" aria-labelledby="workflow">
+    <div class="section-heading"><h2 id="workflow">从本地安装开始</h2><a href="/docs/">查看使用指南 ↗</a></div>
+    <div class="workflow-steps">
+      <div class="step"><span>01</span><div><h3>选择游戏来源</h3><p>确认合法拥有并安装游戏，连接受支持的本地来源。</p></div></div>
+      <div class="step"><span>02</span><div><h3>建立资源索引</h3><p>由你启动索引，再通过目录与搜索找到研究对象。</p></div></div>
+      <div class="step"><span>03</span><div><h3>打开并观察</h3><p>加载资源，查看结构、选择可用动作并检查预览结果。</p></div></div>
+    </div>
+  </section>
+  <section class="section boundary">
+    <h2>尊重内容，<br />保留清晰边界。</h2>
+    <div><p>StormForge 不分发原游戏资源，也不修改游戏资源或客户端。你需要合法拥有并安装受支持的游戏，并确认相关内容的使用权利。</p><p>预览用于学习、研究与检查，不承诺所有资源都受支持，或与原客户端画面完全一致。第三方名称仅用于兼容说明，不代表厂商关联或背书。</p></div>
+  </section>
+  <section class="section contact-strip" aria-labelledby="contact">
+    <div><p class="eyebrow">保持联系</p><h2 id="contact">交流想法，反馈问题。</h2><p>产品咨询、使用反馈与合作联系，欢迎通过邮箱与我们交流。</p></div>
+    <a class="button" href={`mailto:${site.email}`}>{site.email} <span aria-hidden="true">&nbsp;↗</span></a>
+  </section>
 </Layout>

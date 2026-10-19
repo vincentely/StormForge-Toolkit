@@ -1,6 +1,8 @@
-# StormForge-Toolkit
+# 开物有方 · StormForge-Toolkit
 
-StormForge 面向本地合法安装的受支持游戏，提供资源索引、预览与 SFM 资产工作流。
+开物有方是 StormForge 的产品介绍网站。StormForge 面向本地合法安装的受支持游戏，提供资源索引、研究、检查与预览，不修改游戏资源或客户端。
+
+备案：**浙ICP备2023045009号-2**（[工信部备案查询](https://beian.miit.gov.cn/)）；联系邮箱：dev@vollagames.com。
 本仓库是公开产品与发行面；核心产品仍由私有 StormForge 上游维护。
 
 - 官网目标地址：[stormforge.vollagames.com](https://stormforge.vollagames.com)（本版本用于已授权的内部测试）
