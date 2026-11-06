@@ -61,3 +61,25 @@
 ## 2026-10-20 官网正式公开
 
 用户明确授权移除内部测试与 noindex，并更新云服务器。整理首页介绍与排版，新增 robots.txt、7 个公开网页的 sitemap.xml。网站隐私说明的 nginx 日志轮转信息来自现网 /etc/logrotate.d/nginx（daily、rotate 14）；产品发行状态保持据实展示。
+
+## 2026-11-06 首页 CLI 截图
+
+用户确认持有本次截图用于 StormForge 产品官网公开展示的授权，并要求直接使用。权利确认来自用户，未收到书面许可副本。公开文件仅包含四张截图。根据画面筛掉调试视图、被覆盖的主体和测试过程帧，保留角色轮廓清晰、场景可辨识的取景。
+
+采集证据在相邻的 `StormForgeRef`，图片各有原始回执。只读核对 StormForge CLI 文档的上游提交为 `99d1418805f38cf27bec2b0164be0c65d311a952`。历史回执未记录各采集时的源码提交，不能以文档核对提交替代构建身份。日期按 Asia/Shanghai 记录。
+
+| 网站文件 | 原始截图（相对 StormForgeRef） | 采集 |
+| --- | --- | --- |
+| `jaina.webp` | `CatalogRefactor20261023/hots-jaina-final.png` | 2026-10-24，Editor 0.5.3 Release，CLI 离屏 M3 模型 |
+| `blademaster.webp` | `captures/wc3-301-20261023/blademaster-sd-framed.png` | 2026-10-23，Editor 0.5.3 Release，CLI 离屏经典 MDX 模型 |
+| `human-campaign.webp` | `20261023t140927322z_wc3-301-human01-close_f8129_n1_4306aaf8b2de/viewport.png` | 2026-10-23，Editor 后台 CLI 视口，加载 `human01.w3m` 后取景。回执未记录产品版本 |
+| `azeroth.webp` | `WorldHiddenCapture/StormForge World Explorer_wow-1215-azeroth-20261027.png` | 2026-10-27，World Explorer 后台 CLI 截取 Ready 帧。回执版本 0 为采集契约版本，未记录产品版本 |
+
+裁切移除空白边缘或视口界面，按原像素大小转为无损 WebP。坐标为左、上、右、下，右下边界不包含在内。
+
+| 网站文件 | 裁切 | 原始 PNG SHA-256 | WebP SHA-256 |
+| --- | --- | --- | --- |
+| `jaina.webp` | 230, 210, 1190, 750 | `f15e3db62b4259b5da99097ac35a86dc7994206308769ce1371a3fbc873d10ea` | `787a705a7a32da3188b3f0e10a6a6840af51bf359c2f5c531e5e53cae8c4119c` |
+| `blademaster.webp` | 150, 220, 1110, 760 | `d4cde05f30b8e159fe8b80708fe2f62e83f8f925dd98541ea13fee3daa8057b9` | `63d643e2f91a9db05ea2a4d7649c7a1a66763fe753d98b35118aaf662355dd64` |
+| `human-campaign.webp` | 118, 45, 678, 360 | `785d2280dc0bd282592cbc096713668fad0be2e813287f88411dab8e964cebe9` | `17f023ebea11da2fd40f39f3837b6400be5c31738c9de1a2b6e2cad3f8bb4e24` |
+| `azeroth.webp` | 100, 177, 1028, 699 | `4d2392e93da6f1a3efc298acec7a679a537875ccd3788421ad30238cf6098528` | `ceaa26978870e18d265dc5b90d0d904f83585a8da9637c09291867bca9c5c3b5` |

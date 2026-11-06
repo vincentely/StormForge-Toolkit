@@ -1,6 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { site } from '../site';
+
+const captures = [
+  { file: 'jaina', game: '风暴英雄', type: '角色 · 离屏渲染', title: '吉安娜', alt: '吉安娜身披紫金法袍，手持带有蓝色冰晶的法杖。', width: 960, height: 540 },
+  { file: 'blademaster', game: '魔兽争霸 III', type: '角色 · 离屏渲染', title: '兽族剑圣', alt: '兽族剑圣手握宽刃长刀，背着蓝色战旗。', width: 960, height: 540 },
+  { file: 'human-campaign', game: '魔兽争霸 III', type: '场景 · 视口截图', title: '人族战役第一章', alt: '从斜上方俯瞰人族村镇、林地与穿过地图的河流。', width: 560, height: 315 },
+  { file: 'azeroth', game: '魔兽世界', type: '场景 · 视口截图', title: '艾泽拉斯山林', alt: '林间小径穿过针叶林，远处是浅色岩峰和蓝天。', width: 928, height: 522 },
+];
 ---
 <Layout title="探索资源，理解结构" description="开物有方，StormForge 产品介绍。面向本地合法安装的游戏，提供资源索引、模型与动画预览、材质和来源信息检查，让资源研究更直观。">
   <section class="hero">
@@ -27,6 +34,22 @@ import { site } from '../site';
       <p class="fine">Windows 桌面工具 · 公开发行准备中</p>
     </aside>
   </section>
+  <section class="section" aria-labelledby="showcase">
+    <div class="section-heading"><h2 id="showcase">CLI 实拍</h2><p>暴雪游戏的经典角色与场景</p></div>
+    <p class="showcase-intro">用 StormForge 命令行捕获角色模型和场景视口，近看服装与武器，也能俯瞰地图布局。</p>
+    <div class="showcase-grid">
+      {captures.map(({ file, game, type, title, alt, width, height }) => (
+        <figure>
+          <img src={`/images/showcase/${file}.webp`} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
+          <figcaption>
+            <p>{game} <span aria-hidden="true">/</span> {type}</p>
+            <h3>{title}</h3>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="fine showcase-credit">画面由 StormForge 预览渲染。游戏、角色与场景的相关权利归其权利人所有。</p>
+  </section>
   <section class="section" aria-labelledby="capabilities">
     <div class="section-heading"><h2 id="capabilities">从资源目录，到内容细节。</h2><p>查找 · 预览 · 理解</p></div>
     <div class="grid">
@@ -52,3 +75,16 @@ import { site } from '../site';
     <a class="button" href={`mailto:${site.email}`}>{site.email} <span aria-hidden="true">&nbsp;↗</span></a>
   </section>
 </Layout>
+
+<style>
+  .showcase-intro { color: var(--muted); margin-bottom: 24px; }
+  .showcase-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  figure { margin: 0; border: 1px solid var(--line); background: var(--surface); }
+  figure img { display: block; width: 100%; height: auto; }
+  figcaption { padding: 16px 20px; }
+  figcaption p { margin: 0 0 4px; color: var(--muted); font-size: 14px; }
+  figcaption span { color: var(--accent); margin-inline: 4px; }
+  figcaption h3 { margin: 0; }
+  .showcase-credit { margin: 16px 0 0; }
+  @media (max-width: 680px) { .showcase-grid { grid-template-columns: 1fr; gap: 16px; } }
+</style>
