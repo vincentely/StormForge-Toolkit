@@ -83,3 +83,11 @@
 | `blademaster.webp` | 150, 220, 1110, 760 | `d4cde05f30b8e159fe8b80708fe2f62e83f8f925dd98541ea13fee3daa8057b9` | `63d643e2f91a9db05ea2a4d7649c7a1a66763fe753d98b35118aaf662355dd64` |
 | `human-campaign.webp` | 118, 45, 678, 360 | `785d2280dc0bd282592cbc096713668fad0be2e813287f88411dab8e964cebe9` | `17f023ebea11da2fd40f39f3837b6400be5c31738c9de1a2b6e2cad3f8bb4e24` |
 | `azeroth.webp` | 100, 177, 1028, 699 | `4d2392e93da6f1a3efc298acec7a679a537875ccd3788421ad30238cf6098528` | `ceaa26978870e18d265dc5b90d0d904f83585a8da9637c09291867bca9c5c3b5` |
+
+### 吉安娜重拍
+
+2026-11-06 使用 StormForge Editor 0.5.3 Release 的 CLI 离屏渲染重新采集，比较寒冰锥与寒冰箭动作和多个镜头后，采用寒冰锥的模型动作 `Spell C`（序列 6），固定在 230 毫秒。透视镜头偏航 −15°、俯仰 5°、距离 4.6、目标 (0.30, 1.32, 0)、垂直视场角 43°。
+
+- 原始截图为相邻目录中的 `StormForgeRef/captures/website-hots-20261106/jaina-cone-r2.png`，同目录保存同名 JSON 回执。采集的 Editor SHA-256 为 `4f857a58d306e528e185ccfc8574cde07e4e56127ca259a1355d4ba8e986dd0a`。上游核对提交仍为 `99d1418805f38cf27bec2b0164be0c65d311a952`，采集回执未记录该二进制的源码提交。
+- 原始 PNG 为 1280 × 720，SHA-256 为 `0aea945d775ff9f0c97c983a500cdec5427915d58818984542344900b0f4e91b`。
+- 裁切坐标为 (0, 85, 1104, 706)，无缩放。新图 `jaina-cone-of-cold.webp` 为 1104 × 621 的无损 WebP，SHA-256 为 `2f61140d83fb4abce06eb571daf6da93b07f0c8c083c95341a7ec4ea3c8161fd`，替换初版站姿 `jaina.webp`。
