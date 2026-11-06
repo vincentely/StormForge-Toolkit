@@ -1,4 +1,23 @@
-# 当前网站部署：正式公开上线
+# 当前网站部署：CLI 实拍展区
+
+2026-11-06 17:12（Asia/Shanghai），经用户授权更新正式官网。地址：https://stormforge.vollagames.com/#showcase。
+
+- 源码提交：`0243c71c59df06d6fd53bb365fdb531ec876b947`。
+- 静态包：`stormforge-site-0243c71c59df.tar.gz`，1332899 字节。
+- SHA-256：`ab27fa98bd88f7eda3645e6fa9d4ed711c9f40dfada590a8f83f0bf04fa796c6`。
+- current → `/srv/stormforge-site/releases/0243c71c59df`。
+- 上一版本：`/srv/stormforge-site/releases/c85a8dabdccc`。
+- 服务器验证回执：`/var/backups/stormforge-site/20261106T091216Z-0243c71c59df-YCiAPu`（目录时间为 UTC）。
+
+首页展示吉安娜寒冰锥、兽族剑圣、人族战役第一章和艾泽拉斯山林。服务器校验本地构建包后原子切换静态目录。nginx 配置哈希部署前后一致，服务器通过语法检查。
+
+线上首页及四张图均为 200，SHA-256 与本地产物一致。桌面和手机宽度下四图均成功解码，页面无横向溢出。正式和 beta 健康检查均为 200 JSON，GitHub 和微信无 state 回调均为 400 HTML。服务器同时验证六个内页、robots.txt 和 sitemap.xml。
+
+回滚时先确认 current 仍指向本次版本，再使用临时符号链接和原子重命名切回上一版本。此次只切换了静态目录。
+
+---
+
+# 2026-10-20 官网正式公开上线（历史记录）
 
 2026-10-20（Asia/Shanghai），用户明确授权网站正式上线。地址：https://stormforge.vollagames.com/。
 
