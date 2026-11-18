@@ -1,5 +1,6 @@
 # StormForge-Toolkit 维护边界
 
+- 本仓库本地和远端都只保留 `main` 分支。所有开发、文档和验收记录都直接提交到 `main`，禁止自行创建任务分支（包括 `codex/*`）。提交前用 `git branch --show-current` 确认当前分支。
 - 本仓库是 StormForge 公开产品与发行面，不是核心源码仓库。
 - `D:\StormForge` 是只读上游事实来源；记录来源提交，不修改上游。
 - Editor、Server、Launcher、Client、Runtime 核心二进制仅由私有上游构建、测试、签名和冻结。

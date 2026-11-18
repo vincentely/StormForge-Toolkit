@@ -6,6 +6,8 @@
 
 ## 账户体系与登录验收
 
+本次试用论坛开发路线、版块规划与统一登录验收记录已纳入 StormForge-Toolkit 的 `main` 分支，原始记录提交为 `b75c82c`。
+
 StormForge 负责用户注册、登录和账户状态，Discourse 保存帖子、版主权限和本地社区资料。试用机已关闭普通用户注册和邮件免密登录，当前的本地管理员仅用于部署和恢复。实际用户入口采用 DiscourseConnect，论坛以 StormForge 稳定的 `user_id` 作为 `external_id`。GitHub、微信等身份在 StormForge 内关联到同一用户时，应回到同一份论坛资料。
 
 试用论坛已启用 DiscourseConnect。本次验收对应的 StormForge 账号服务提交为 `3a757ad6d349bbc4e7f4167d6de518134f74c89f`，开发构建通过了 5 项自动化测试。成员从论坛进入账号服务，选择微信扫码或 GitHub 授权。账号服务分别按本应用的微信 OpenID 或 GitHub 数字 ID 查询已绑定的活动账号，两条路径均以同一个 StormForge UUID 返回论坛。
