@@ -1,9 +1,73 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { desktopChannels, desktopPackages } from '../../scripts/desktop-releases.mjs';
 import { readChannel } from '../../scripts/manifest.mjs';
-const channels = [{ id: 'stable', label: '稳定版' }, { id: 'beta', label: '测试版' }].map(c => ({ ...c, manifest: readChannel(c.id) }));
+
+const integrations = ['stable', 'beta'].flatMap(channel => {
+  const manifest = readChannel(channel);
+  return manifest ? [manifest] : [];
+});
+const bytes = new Intl.NumberFormat('zh-CN');
+const size = (value: number) => value < 1048576
+  ? `${(value / 1024).toFixed(0)} KiB` : `${(value / 1048576).toFixed(1)} MiB`;
 ---
-<Layout title="下载与版本" description="查看 StormForge 公开发行状态。每个正式下载均提供版本、大小、来源提交与 SHA-256 校验。">
-<header class="page-head"><p class="eyebrow">DOWNLOADS</p><h1>下载之前，<br />先确认版本与来源。</h1><p class="lead">正式发行包由 StormForge 私有上游构建、测试和签名。本页仅展示经过校验的公开发行清单。</p></header>
-<div class="prose">{channels.map(({ label, manifest }) => <section class="release-card"><h2 style="margin-top:0">{label}</h2>{manifest ? <><p>版本 {manifest.version} · <time datetime={manifest.published_at}>{manifest.published_at}</time></p><a href={manifest.release_notes_url}>版本说明</a>{manifest.artifacts.map((a: {filename: string; platform: string; architecture: string; size_bytes: number; sha256: string; source_commit: string; primary_url: string; github_url: string}) => <article><h3>{a.filename}</h3><dl><dt>平台</dt><dd>{a.platform} / {a.architecture}</dd><dt>文件大小</dt><dd>{a.size_bytes.toLocaleString('zh-CN')} 字节</dd><dt>SHA-256</dt><dd><code>{a.sha256}</code></dd><dt>来源提交</dt><dd><code>{a.source_commit}</code></dd></dl><div class="actions"><a class="button primary" href={a.primary_url}>下载</a><a class="button" href={a.github_url}>GitHub 镜像</a></div></article>)}</> : <><span class="tag">尚未公开发布</span><p style="margin-top:16px">当前没有经过验证的公开{label}安装包或发行清单。完成上游发行验证后，这里会提供真实下载及完整校验信息。</p></>}</section>)}<h2>确认文件完整性</h2><p>下载后应核对字节大小与 SHA-256。任何差异都应停止安装。插件下载同样需要来源版本和公开许可证，当前尚未开放。</p><a href="/docs/">查看校验与安装步骤 →</a></div>
+<Layout title="下载 StormHub 和 StormForge" description="下载 Windows x64 稳定版和测试版。用 StormHub 安装和更新 StormForge，或直接获取便携 ZIP 与 SHA-256 校验文件。">
+  <header class="page-head">
+    <h1>下载 StormHub 和 StormForge</h1>
+    <p class="lead">首次使用，下载 StormHub 并解压，双击 <code>StormHub.exe</code> 即可安装和更新 StormForge。也可以单独下载 StormForge 便携版。</p>
+  </header>
+  <div class="download-grid">
+    {desktopChannels.map(({ id, label }) => (
+      <section class="release-card" aria-labelledby={id}>
+        <h2 id={id}>{label} <span>{id}</span></h2>
+        {desktopPackages.filter(p => p.channel === id).map(p => (
+          <article class="download-product" data-product={p.product} data-channel={id}>
+            <div class="product-name">
+              <img src={p.product === 'hub' ? '/images/stormhub-icon.png' : '/images/stormforge-icon.png'} width="44" height="44" alt="" />
+              <div><h3>{p.name}</h3><p>{p.product === 'hub' ? '安装、更新和管理应用' : '查看和预览本机游戏资源'}</p></div>
+            </div>
+            <p class="fine"><time>{p.version}</time> · Windows x64 · <span data-size>{size(p.size_bytes)}</span></p>
+            <a class:list={['button', { primary: p.product === 'hub' }]} href={p.url} data-bytes={p.size_bytes} data-sha256={p.sha256} aria-label={`下载 ${p.name} ${label} Windows x64`}>下载 {p.name}</a>
+            <details><summary>大小与 SHA-256</summary><p data-bytes-label>{bytes.format(p.size_bytes)} 字节</p><code>{p.sha256}</code><a href={p.checksum}>下载 SHA-256 校验文件</a></details>
+          </article>
+        ))}
+      </section>
+    ))}
+  </div>
+  <p class="download-help"><a href="/docs/#install">首次安装与更新</a> · <a href="/docs/#verify">如何核对下载文件</a> · <a href="https://stormforge.vollagames.com/downloads/">发行服务器实时清单</a></p>
+  <p id="channel-status" role="status" hidden>暂时无法检查部分通道的新版本。可下载页面列出的版本，或查看发行服务器实时清单。</p>
+  {integrations.length > 0 && <section class="prose"><h2>其他发行包</h2>
+    {integrations.map(manifest => <section>
+      <h3>{manifest.version} · {manifest.channel === 'stable' ? '稳定版' : '测试版'}</h3>
+      <p><time datetime={manifest.published_at}>{manifest.published_at}</time> · <a href={manifest.release_notes_url}>版本说明</a></p>
+      {manifest.artifacts.map(a => <article>
+        <h4>{a.filename}</h4><p>{a.platform} / {a.architecture} · {bytes.format(a.size_bytes)} 字节</p>
+        <p>SHA-256 <code>{a.sha256}</code><br />来源提交 <code>{a.source_commit}</code></p>
+        <p><a href={a.primary_url}>下载</a> · <a href={a.github_url}>GitHub 镜像</a></p>
+      </article>)}
+    </section>)}
+  </section>}
 </Layout>
+<script>
+  import { refreshDesktopDownloads } from '../desktop-downloads';
+  void refreshDesktopDownloads();
+</script>
+<style>
+  .download-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .download-grid .release-card { margin: 0; padding: clamp(20px, 3vw, 38px); }
+  .release-card h2 { margin: 0 0 18px; }
+  .release-card h2 span { font: normal .95rem Consolas, monospace; color: var(--muted); }
+  .download-product { padding-block: 22px; border-top: 1px solid var(--line); min-width: 0; }
+  .download-product:last-child { padding-bottom: 0; }
+  .product-name { display: flex; align-items: center; gap: 12px; }
+  .product-name img { object-fit: contain; flex: none; }
+  .product-name h3, .product-name p { margin: 0; }
+  .product-name p, .download-product details { font-size: .92rem; color: var(--prose); }
+  .download-product .fine { margin: 12px 0; }
+  .download-product details { margin-top: 12px; }
+  .download-product summary { cursor: pointer; }
+  .download-product details p { margin: 8px 0 0; }
+  .download-product details code { display: block; overflow-wrap: anywhere; }
+  .download-help { margin: 28px 0 48px; }
+  @media (max-width: 700px) { .download-grid { grid-template-columns: 1fr; } }
+</style>

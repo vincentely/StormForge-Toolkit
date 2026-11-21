@@ -1,8 +1,19 @@
 # 发行清单 v1
 
+## Windows 桌面产品
+
+StormHub 与 StormForge 的发行标识为 `hub` 和 `editor`，通道为 `dist` 与 `beta`。
+网站的 `release/desktop-windows.json` 记录已核实的 ZIP 版本、序号、大小和 SHA-256，用于静态首屏。
+每行数据与官方 `/downloads/channels/<channel>/<product>/windows-x64.json`、其签名清单和 ZIP 的 `.sha256` 对应。
+浏览器用 StormHub 的 P-256 公钥检查同源通道指针。发现新版本后，在新 ZIP 与校验文件均可读时同时切换下载地址和校验信息。
+归档存放于正式云服务器，完整实时目录在 `/downloads/`，用户下载页在 `/download/`。
+本次四包已由独立 Windows x64 验收机从公网下载并核验。
+
+## Toolkit 与引擎集成包
+
 `schema/manifest.v1.schema.json` 定义清单结构。`examples/*.example.json` 是故意不可下载的样例：保留域 example.invalid 和全零示意哈希，不对应真实文件，不用于网站，也不得改名为 latest.json。
 
-正式清单放入 `release/manifests/stable.json` 或 `beta.json`。当前没有正式清单，不创建空文件。官网在构建时读取并严格验证；缺失显示“尚未公开发布”，非法内容使构建失败。稳定版必须是最终版本，beta 必须含 prerelease 标识。添加新平台或下载域名必须经过 Schema/校验规则审查。
+其他 Toolkit 或引擎集成包的清单放入 `release/manifests/stable.json` 或 `beta.json`。当前没有此类清单，不创建空文件。官网在构建时读取并严格验证；缺失时不展示对应插件，非法内容使构建失败。稳定版必须是最终版本，beta 必须含 prerelease 标识。添加新平台或下载域名必须经过 Schema/校验规则审查。
 
 ## 发行顺序
 

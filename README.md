@@ -6,7 +6,7 @@
 本仓库是公开产品与发行面；核心产品仍由私有 StormForge 上游维护。
 
 - 官网：[stormforge.vollagames.com](https://stormforge.vollagames.com)
-- [下载页](https://stormforge.vollagames.com/download/)（当前无公开稳定版或测试版）
+- [下载页](https://stormforge.vollagames.com/download/)（StormHub 和 StormForge，Windows x64，dist / beta）
 - 集成说明：[Unity](integrations/unity/README.md) · [Unreal Engine](integrations/unreal/README.md)
 - [发行规范](release/README.md) · [内容来源](docs/content-sources.md) · [部署说明](deploy/README.md)
 
@@ -31,7 +31,7 @@ pnpm dev
 
 浏览器验收：`pnpm exec playwright install chromium`，启动 `pnpm preview --port 4321`，另一个终端执行 `node scripts/visual-check.mjs`。截图写入被忽略的 `artifacts/visual/`。
 
-官网不使用 CMS、SSR、数据库、登录后台、广告或分析追踪。真实 manifest 放入 `release/manifests/stable.json` 或 `beta.json`，在构建时验证并静态渲染；不请求未经审查的远程清单。无 manifest 是正常的“尚未发行”状态，格式错误会使构建失败。
+官网不使用 CMS、SSR、数据库、登录后台、广告或分析追踪。桌面下载页用 `release/desktop-windows.json` 预渲染经过核实的归档，打开页面后向同源的官方通道查询新版本并验证发布签名。发行服务器的实时列表支持关闭 JavaScript 的浏览器。其他发行清单沿用 `release/manifests/` 的独立格式。
 
 ## 下载校验
 

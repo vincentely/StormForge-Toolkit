@@ -1,5 +1,6 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { validateManifest, readChannel, verifyArtifacts } from './manifest.mjs';
+import { desktopPackages } from './desktop-releases.mjs';
 const args = process.argv.slice(2);
 if (args.length && (args.length !== 3 || args[0] !== '--verify')) throw new Error('Usage: --verify manifest.json artifact-directory');
 if (args.length) {
@@ -13,5 +14,6 @@ if (args.length) {
   if (existsSync('release/manifests')) {
     for (const name of readdirSync('release/manifests')) if (!['stable.json', 'beta.json'].includes(name)) throw new Error(`Unexpected manifest: ${name}`);
   }
-  for (const channel of ['stable', 'beta']) console.log(`${channel}: ${readChannel(channel) ? 'metadata validated (artifact bytes require --verify)' : 'no public release'}`);
+  console.log(`Windows desktop downloads: ${desktopPackages.length} validated package entries.`);
+  for (const channel of ['stable', 'beta']) console.log(`Additional packages (${channel}): ${readChannel(channel) ? 'metadata validated' : 'none'}`);
 }

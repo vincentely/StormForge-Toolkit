@@ -1,5 +1,6 @@
 import { chromium } from '@playwright/test';
 import { mkdirSync, writeFileSync } from 'node:fs';
+import { desktopPackages } from './desktop-releases.mjs';
 const base='http://127.0.0.1:4321';
 const out='artifacts/visual';
 mkdirSync(out,{recursive:true});
@@ -19,8 +20,12 @@ try {
       if(await page.locator('h1').count()!==1) throw new Error('Expected one h1');
       if(await page.locator('img:not([alt])').count()) throw new Error('Missing alt');
       if(route==='/download/') {
-        if(await page.getByText('尚未公开发布',{exact:true}).count()!==2) throw new Error('Missing release fallback');
-        if(await page.locator('a[href$=".zip"], a[href$=".exe"]').count()) throw new Error('Unexpected fake download');
+        for (const p of desktopPackages) {
+          const download = page.locator(`a[href="${p.url}"]`);
+          if (await download.count() !== 1 || !await download.isVisible() ||
+              await download.getAttribute('data-sha256') !== p.sha256 ||
+              await page.locator(`a[href="${p.checksum}"]`).count() !== 1) throw new Error(`Missing verified download: ${p.name} ${p.channel}`);
+        }
       }
       if(name!=='narrow') await page.screenshot({path:`${out}/${name}-${route==='/'?'home':route.replaceAll('/','')}.png`,fullPage:true});
       results.push({viewport:name,route,overflow:false});

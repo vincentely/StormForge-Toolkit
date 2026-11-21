@@ -6,7 +6,9 @@
 
 来源 `984837c730f18459d4e21a86c27f225389deb8c1` 的 `config/editor.dist.json` 将 API 根固定为 `https://stormforge.vollagames.com`。上游 nginx 正式站代理 `https://127.0.0.1:19443`，beta 代理 18443。新配置仅为正式站 `/` 增加静态服务，`/v1/`、`/healthz` 继续代理；已核对两个 OAuth 回调均在 `/v1/oauth/` 下，query 原样保留。beta 整站保持原代理。
 
-`deploy/nginx/stormforge.conf` 是静态网站配置模板，安装前须对比并备份线上版本。保留上游 TLS 1.2、证书路径与 loopback proxy_ssl_verify off，不在这次网站工作中改变 Server TLS 策略。`/srv/stormforge-site` 是建议的新静态目录，需在真实服务器确认无冲突后采用。当前没有独立产品下载目录映射，不承诺不存在的云下载 URL。
+`/srv/stormforge-site/current` 指向当前网站版本。`deploy/nginx/stormforge.conf` 是模板，生产站点还包含账号和论坛路由。部署前备份并对比线上配置，保留现有站点及其 TLS、代理和 include。
+
+正式域名加载本仓库的 `stormforge-site-download-pages.conf` 和发行服务原有的 `stormhub-downloads.conf`。网站配置只负责两个 HTML 入口。它在 server 层把 `/download/` 映射到静态网站的下载页，把 `/downloads/` 映射到发行服务生成的实时列表。产品发布仓库维护签名清单、文件、ZIP 的路由和连接限制区。两个通道共用正式域名。初次接入时，备份线上虚拟主机，在原有发行服务 include 前添加网站 include，完成语法检查后 reload。
 
 ## 本地 / CI 准备
 
@@ -67,7 +69,7 @@ sudo systemctl reload nginx
 
 `nginx -t` 或 reload 失败立即按下节恢复旧链接与配置，禁止将失败描述为完成。已上线静态站切换后立刻生效，不依赖 reload；因此需先验证版本目录，再切换并检查。
 
-检查首页、文档、404；比较部署前后 `/healthz`、无效凭据的 `/v1/auth/refresh`、无 state 的两个 OAuth callback 状态与内容类型，不应得到网站 HTML。避免真实登录写操作。实际 Editor 登录回归由有权限用户完成。TLS、代理可用性与 nginx 语法需要目标服务器实测，本地文本测试不替代这些验证。
+切换后核对首页、安装文档、下载页、发行实时列表及 404。官网与实时列表应直接返回 200，四个 ZIP 的字节数与 SHA-256 应符合发行记录。比较两通道 `/healthz` 和 OAuth 回调的状态与内容类型。涉及下载页布局变更时，发行服务可用当前网站模板和已校验的发布快照重新生成列表 HTML。
 
 ## 回滚
 

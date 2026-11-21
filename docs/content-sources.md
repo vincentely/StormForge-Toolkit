@@ -91,3 +91,9 @@
 - 原始截图为相邻目录中的 `StormForgeRef/captures/website-hots-20261106/jaina-cone-r2.png`，同目录保存同名 JSON 回执。采集的 Editor SHA-256 为 `4f857a58d306e528e185ccfc8574cde07e4e56127ca259a1355d4ba8e986dd0a`。上游核对提交仍为 `99d1418805f38cf27bec2b0164be0c65d311a952`，采集回执未记录该二进制的源码提交。
 - 原始 PNG 为 1280 × 720，SHA-256 为 `0aea945d775ff9f0c97c983a500cdec5427915d58818984542344900b0f4e91b`。
 - 裁切坐标为 (0, 85, 1104, 706)，无缩放。新图 `jaina-cone-of-cold.webp` 为 1104 × 621 的无损 WebP，SHA-256 为 `2f61140d83fb4abce06eb571daf6da93b07f0c8c083c95341a7ec4ea3c8161fd`，替换初版站姿 `jaina.webp`。
+
+## StormHub 与 Windows 发行
+
+2026-11-21 的 StormHub 图标直接取自已发程序共用的 `assets/hub/stormhub.ico` 的 256 像素 PNG 图层。
+两个产品、两个通道的 ZIP 大小和 SHA-256 已与官方签名通道及独立 Windows 验收回执核对。
+Hub 发布构建来源为 `95b71a2de`，StormForge 为 `94e3cd035`。网站公开数据仅列出发布版本与归档校验信息。
