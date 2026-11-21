@@ -3,21 +3,21 @@ import Layout from '../layouts/Layout.astro';
 import { desktopChannels, desktopPackages } from '../../scripts/desktop-releases.mjs';
 import { readChannel } from '../../scripts/manifest.mjs';
 
-const integrations = ['stable', 'beta'].flatMap(channel => {
-  const manifest = readChannel(channel);
+const integrations = desktopChannels.filter(channel => channel.webDownload).flatMap(channel => {
+  const manifest = readChannel(channel.id === 'dist' ? 'stable' : channel.id);
   return manifest ? [manifest] : [];
 });
 const bytes = new Intl.NumberFormat('zh-CN');
 const size = (value: number) => value < 1048576
   ? `${(value / 1024).toFixed(0)} KiB` : `${(value / 1048576).toFixed(1)} MiB`;
 ---
-<Layout title="下载 StormHub 和 StormForge" description="下载 Windows x64 稳定版和测试版。用 StormHub 安装和更新 StormForge，或直接获取便携 ZIP 与 SHA-256 校验文件。">
+<Layout title="下载 StormHub 和 StormForge" description="下载 Windows x64 测试版 StormHub 和 StormForge。稳定版下载将于后续开放。">
   <header class="page-head">
     <h1>下载 StormHub 和 StormForge</h1>
     <p class="lead">首次使用，下载 StormHub 并解压，双击 <code>StormHub.exe</code> 即可安装和更新 StormForge。也可以单独下载 StormForge 便携版。</p>
   </header>
   <div class="download-grid">
-    {desktopChannels.map(({ id, label }) => (
+    {desktopChannels.map(({ id, label, webDownload }) => (
       <section class="release-card" aria-labelledby={id}>
         <h2 id={id}>{label} <span>{id}</span></h2>
         {desktopPackages.filter(p => p.channel === id).map(p => (
@@ -26,16 +26,26 @@ const size = (value: number) => value < 1048576
               <img src={p.product === 'hub' ? '/images/stormhub-icon.png' : '/images/stormforge-icon.png'} width="44" height="44" alt="" />
               <div><h3>{p.name}</h3><p>{p.product === 'hub' ? '安装、更新和管理应用' : '查看和预览本机游戏资源'}</p></div>
             </div>
-            <p class="fine"><time>{p.version}</time> · Windows x64 · <span data-size>{size(p.size_bytes)}</span></p>
-            <a class:list={['button', { primary: p.product === 'hub' }]} href={p.url} data-bytes={p.size_bytes} data-sha256={p.sha256} aria-label={`下载 ${p.name} ${label} Windows x64`}>下载 {p.name}</a>
-            <details><summary>大小与 SHA-256</summary><p data-bytes-label>{bytes.format(p.size_bytes)} 字节</p><code>{p.sha256}</code><a href={p.checksum}>下载 SHA-256 校验文件</a></details>
+            {!webDownload ? <>
+              <p class="fine">Windows x64 · 后续开放</p>
+              <button type="button" class:list={['button', { primary: p.product === 'hub' }]} commandfor="dist-notice" command="show-modal" aria-haspopup="dialog" aria-label={`下载 ${p.name} ${label} Windows x64`}>下载 {p.name}</button>
+            </> : <>
+              <p class="fine"><time>{p.version}</time> · Windows x64 · <span data-size>{size(p.size_bytes)}</span></p>
+              <a class:list={['button', { primary: p.product === 'hub' }]} href={p.url} data-bytes={p.size_bytes} data-sha256={p.sha256} aria-label={`下载 ${p.name} ${label} Windows x64`}>下载 {p.name}</a>
+              <details><summary>大小与 SHA-256</summary><p data-bytes-label>{bytes.format(p.size_bytes)} 字节</p><code>{p.sha256}</code><a href={p.checksum}>下载 SHA-256 校验文件</a></details>
+            </>}
           </article>
         ))}
       </section>
     ))}
   </div>
-  <p class="download-help"><a href="/docs/#install">首次安装与更新</a> · <a href="/docs/#verify">如何核对下载文件</a> · <a href="https://stormforge.vollagames.com/downloads/">发行服务器实时清单</a></p>
-  <p id="channel-status" role="status" hidden>暂时无法检查部分通道的新版本。可下载页面列出的版本，或查看发行服务器实时清单。</p>
+  <dialog id="dist-notice" aria-labelledby="dist-notice-title" aria-describedby="dist-notice-message">
+    <h2 id="dist-notice-title">稳定版下载</h2>
+    <p id="dist-notice-message">后续开放。</p>
+    <form method="dialog"><button class="button primary">知道了</button></form>
+  </dialog>
+  <p class="download-help"><a href="/docs/#install">首次安装与更新</a> · <a href="/docs/#verify">如何核对下载文件</a></p>
+  <p id="channel-status" role="status" hidden>暂时无法检查测试版更新。仍可下载页面列出的测试版。</p>
   {integrations.length > 0 && <section class="prose"><h2>其他发行包</h2>
     {integrations.map(manifest => <section>
       <h3>{manifest.version} · {manifest.channel === 'stable' ? '稳定版' : '测试版'}</h3>
@@ -50,6 +60,12 @@ const size = (value: number) => value < 1048576
 </Layout>
 <script>
   import { refreshDesktopDownloads } from '../desktop-downloads';
+  if (!('commandForElement' in HTMLButtonElement.prototype)) {
+    const notice = document.querySelector<HTMLDialogElement>('#dist-notice');
+    for (const button of document.querySelectorAll('button[commandfor="dist-notice"]')) {
+      button.addEventListener('click', () => notice?.showModal());
+    }
+  }
   void refreshDesktopDownloads();
 </script>
 <style>
@@ -64,6 +80,13 @@ const size = (value: number) => value < 1048576
   .product-name h3, .product-name p { margin: 0; }
   .product-name p, .download-product details { font-size: .92rem; color: var(--prose); }
   .download-product .fine { margin: 12px 0; }
+  button.button { font-family: inherit; line-height: inherit; cursor: pointer; }
+  button.button:not(.primary) { color: var(--text); background: transparent; }
+  dialog { width: min(24rem, calc(100% - 2rem)); padding: 28px; border: 1px solid var(--line); background: var(--bg); color: var(--text); }
+  dialog::backdrop { background: rgb(0 0 0 / 50%); }
+  dialog h2 { margin: 0 0 8px; }
+  dialog p { margin: 0 0 24px; color: var(--prose); }
+  dialog form { text-align: right; }
   .download-product details { margin-top: 12px; }
   .download-product summary { cursor: pointer; }
   .download-product details p { margin: 8px 0 0; }

@@ -8,7 +8,7 @@
 
 `/srv/stormforge-site/current` 指向当前网站版本。`deploy/nginx/stormforge.conf` 是模板，生产站点还包含账号和论坛路由。部署前备份并对比线上配置，保留现有站点及其 TLS、代理和 include。
 
-正式域名加载本仓库的 `stormforge-site-download-pages.conf` 和发行服务原有的 `stormhub-downloads.conf`。网站配置只负责两个 HTML 入口。它在 server 层把 `/download/` 映射到静态网站的下载页，把 `/downloads/` 映射到发行服务生成的实时列表。产品发布仓库维护签名清单、文件、ZIP 的路由和连接限制区。两个通道共用正式域名。初次接入时，备份线上虚拟主机，在原有发行服务 include 前添加网站 include，完成语法检查后 reload。
+正式域名加载本仓库的 `stormforge-site-download-pages.conf` 和发行服务原有的 `stormhub-downloads.conf`。网站把 `/download/`、`/downloads/` 和对应 HTML 地址映射到同一下载页，各入口遵循相同的通道开放状态。产品发布仓库维护签名清单、文件、ZIP 的路由和连接限制区。两个通道共用正式域名。初次接入时，备份线上虚拟主机，在原有发行服务 include 前添加网站 include，完成语法检查后 reload。
 
 ## 本地 / CI 准备
 
@@ -69,7 +69,7 @@ sudo systemctl reload nginx
 
 `nginx -t` 或 reload 失败立即按下节恢复旧链接与配置，禁止将失败描述为完成。已上线静态站切换后立刻生效，不依赖 reload；因此需先验证版本目录，再切换并检查。
 
-切换后核对首页、安装文档、下载页、发行实时列表及 404。官网与实时列表应直接返回 200，四个 ZIP 的字节数与 SHA-256 应符合发行记录。比较两通道 `/healthz` 和 OAuth 回调的状态与内容类型。涉及下载页布局变更时，发行服务可用当前网站模板和已校验的发布快照重新生成列表 HTML。
+切换后核对首页、安装文档、各下载页入口及 404。所有下载页入口应直接返回 200，并显示同一套按钮。当前稳定版按钮打开「后续开放」提示，测试版 ZIP 及校验文件可直接下载。比较两通道 `/healthz` 和签名清单的响应，确认桌面更新服务正常。
 
 ## 回滚
 

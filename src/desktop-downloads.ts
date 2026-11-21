@@ -55,7 +55,9 @@ export async function refreshDesktopDownloads() {
   if (!status || location.origin !== 'https://stormforge.vollagames.com') return;
   try {
     const key = await crypto.subtle.importKey('raw', hexBytes(publisher), { name: 'ECDSA', namedCurve: 'P-256' }, false, ['verify']);
-    const results = await Promise.allSettled(Array.from(document.querySelectorAll<HTMLElement>('[data-product][data-channel]'), card => refreshCard(card, key)));
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-product][data-channel]'))
+      .filter(card => card.querySelector('a[data-sha256]'));
+    const results = await Promise.allSettled(cards.map(card => refreshCard(card, key)));
     status.hidden = results.every(result => result.status === 'fulfilled');
   } catch {
     status.hidden = false;

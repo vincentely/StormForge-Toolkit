@@ -21,6 +21,21 @@ try {
       if(await page.locator('img:not([alt])').count()) throw new Error('Missing alt');
       if(route==='/download/') {
         for (const p of desktopPackages) {
+          if (p.channel === 'dist') {
+            const card = page.locator(`[data-channel="dist"][data-product="${p.product}"]`);
+            const trigger = card.getByRole('button', { name: `下载 ${p.name} 稳定版 Windows x64` });
+            if (await card.locator('a[href]').count()) throw new Error('Stable package link exposed');
+            await trigger.click();
+            const notice = page.getByRole('dialog', { name: '稳定版下载' });
+            if (!await notice.isVisible() || !await notice.getByText('后续开放。', { exact: true }).isVisible()) {
+              throw new Error('Missing stable download notice');
+            }
+            await notice.getByRole('button', { name: '知道了' }).click();
+            if (await notice.isVisible() || !await trigger.evaluate(el => el === document.activeElement)) {
+              throw new Error('Stable notice did not return focus to the download button');
+            }
+            continue;
+          }
           const download = page.locator(`a[href="${p.url}"]`);
           if (await download.count() !== 1 || !await download.isVisible() ||
               await download.getAttribute('data-sha256') !== p.sha256 ||

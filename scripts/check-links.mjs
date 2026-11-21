@@ -1,7 +1,8 @@
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join, resolve } from 'node:path';
-import { desktopPackages } from './desktop-releases.mjs';
-const downloadService = new Set(['https://stormforge.vollagames.com/downloads/', ...desktopPackages.flatMap(p => [p.url, p.checksum])]);
+import { desktopChannels, desktopPackages } from './desktop-releases.mjs';
+const openChannels = desktopChannels.filter(c => c.webDownload).map(c => c.id);
+const downloadService = new Set(desktopPackages.filter(p => openChannels.includes(p.channel)).flatMap(p => [p.url, p.checksum]));
 function files(dir) { return readdirSync(dir, {withFileTypes:true}).flatMap(e => e.isDirectory() ? files(join(dir,e.name)) : [join(dir,e.name)]); }
 let count = 0;
 for (const file of files('dist').filter(f => f.endsWith('.html'))) {

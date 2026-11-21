@@ -13,15 +13,19 @@ test('production API and health preserve upstream URI, beta remains proxied',()=
   assert.doesNotMatch(nginx,/proxy_pass https:\/\/127\.0\.0\.1:19443\//);
 });
 
-test('website download page and live archive listing have independent origins', () => {
+test('all public HTML download paths share the website and package URLs use the release service', () => {
   const site = readFileSync('deploy/nginx/stormforge.conf', 'utf8');
   assert.match(site, /include \/etc\/nginx\/snippets\/stormhub-downloads\.conf;/);
   assert.match(site, /include \/etc\/nginx\/snippets\/stormforge-site-download-pages\.conf;/);
   const downloads = readFileSync('deploy/nginx/stormforge-site-download-pages.conf', 'utf8');
-  const location = route => downloads.split(`location = ${route} {`)[1].split('}')[0];
-  for (const route of ['/download/', '/downloads/']) {
-    assert.ok(downloads.includes(`rewrite ^${route}$ ${route}index.html last;`));
+  const rewrites = [...downloads.matchAll(/^rewrite (\S+) (\S+) last;$/gm)]
+    .map(([, pattern, target]) => ({ pattern: new RegExp(pattern), target }));
+  const targetFor = path => rewrites.find(route => route.pattern.test(path))?.target;
+  for (const path of ['/download/', '/downloads', '/downloads/', '/downloads/index.html']) {
+    assert.equal(targetFor(path), '/download/index.html');
   }
-  assert.match(location('/download/index.html'), /root \/srv\/stormforge-site\/current;/);
-  assert.match(location('/downloads/index.html'), /root \/srv\/stormforge;/);
+  for (const path of ['/downloads/channels/dist/hub/windows-x64.json', '/downloads/releases/beta/editor/2026-11-21/windows-x64.json', '/downloads/packages/beta/hub/file.zip', '/downloads/blobs/digest']) {
+    assert.equal(targetFor(path), undefined);
+  }
+  assert.match(downloads, /location = \/download\/index\.html \{\s*root \/srv\/stormforge-site\/current;/);
 });

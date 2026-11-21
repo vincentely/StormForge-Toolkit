@@ -6,7 +6,7 @@ StormHub 与 StormForge 的发行标识为 `hub` 和 `editor`，通道为 `dist`
 网站的 `release/desktop-windows.json` 记录已核实的 ZIP 版本、序号、大小和 SHA-256，用于静态首屏。
 每行数据与官方 `/downloads/channels/<channel>/<product>/windows-x64.json`、其签名清单和 ZIP 的 `.sha256` 对应。
 浏览器用 StormHub 的 P-256 公钥检查同源通道指针。发现新版本后，在新 ZIP 与校验文件均可读时同时切换下载地址和校验信息。
-归档存放于正式云服务器，完整实时目录在 `/downloads/`，用户下载页在 `/download/`。
+归档存放于正式云服务器。`/download/` 与 `/downloads/` 使用同一官网下载页。`scripts/desktop-releases.mjs` 的 `webDownload` 决定网页可下载的通道。当前 beta 开放，dist 按钮显示「后续开放」。
 本次四包已由独立 Windows x64 验收机从公网下载并核验。
 
 ## Toolkit 与引擎集成包

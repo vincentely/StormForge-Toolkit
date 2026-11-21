@@ -1,8 +1,8 @@
 import records from '../release/desktop-windows.json' with { type: 'json' };
 
 export const desktopChannels = [
-  { id: 'dist', label: '稳定版' },
-  { id: 'beta', label: '测试版' },
+  { id: 'dist', label: '稳定版', webDownload: false },
+  { id: 'beta', label: '测试版', webDownload: true },
 ];
 
 const products = { hub: 'StormHub', editor: 'StormForge' };
