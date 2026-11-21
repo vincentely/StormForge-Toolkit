@@ -12,6 +12,17 @@
 
 ## 本地 / CI 准备
 
+桌面下载的静态回退表为 `release/desktop-windows.json`，没有自动改写该表的发布入口。
+取得上游正式签名通道指针及实际 ZIP 后，只更新对应产品的日期、序号、字节数与小写 SHA-256。
+beta StormForge 的按钮和校验文件始终使用
+`https://stormforge.vollagames.com/downloads/packages/beta/editor/StormForge-beta-Windows-x64.zip`
+及其 `.sha256`，无 JavaScript 时也一样。日期包保留为不可变核验输入；发布前运行
+`node scripts/verify-remote.mjs`，完整下载并核对日期包和固定入口的字节与哈希。
+浏览器刷新仍先验签通道指针及序号，再比较日期包与固定入口的大小和校验文件，全部一致才更新页面元数据。
+网页浏览不重新下载整个 ZIP；归档字节完整性由上述正式发布核验完成。
+beta StormHub 保持日期包入口，两个 dist 按钮继续显示「后续开放」。
+先激活匹配的上游下载快照，再切换本站，避免静态回退表指向尚未就绪的固定入口。
+
 ```sh
 pnpm install --frozen-lockfile
 pnpm check

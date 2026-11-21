@@ -1,9 +1,10 @@
 import { createHash } from 'node:crypto';
-import { desktopPackages } from './desktop-releases.mjs';
+import { desktopArchive, desktopPackages } from './desktop-releases.mjs';
 import { readChannel } from './manifest.mjs';
 
 const artifacts = [
-  ...desktopPackages.map(p => ({ ...p, filename: p.url.split('/').at(-1), urls: [p.url] })),
+  ...desktopPackages.map(p => ({ ...p, filename: p.url.split('/').at(-1),
+    urls: [desktopArchive(p.product, p.channel, p.version), p.url] })),
   ...['stable', 'beta'].flatMap(ch =>
     (readChannel(ch)?.artifacts ?? []).map(a => ({ ...a, urls: [a.primary_url, a.github_url] }))),
 ];

@@ -14,6 +14,12 @@ export function desktopArchive(product, channel, version) {
   return `https://stormforge.vollagames.com/downloads/packages/${channel}/${product}/${version}/${filename}`;
 }
 
+export function desktopDownload(product, channel, version) {
+  return product === 'editor' && channel === 'beta'
+    ? 'https://stormforge.vollagames.com/downloads/packages/beta/editor/StormForge-beta-Windows-x64.zip'
+    : desktopArchive(product, channel, version);
+}
+
 export const desktopPackages = records.map(({ channel, product, version, size_bytes, sha256, sequence }) => {
   const identity = `${channel}/${product}`;
   if (!desktopChannels.some(c => c.id === channel) || !Object.hasOwn(products, product) || seen.has(identity)
@@ -23,7 +29,7 @@ export const desktopPackages = records.map(({ channel, product, version, size_by
   }
   seen.add(identity);
   const name = products[product];
-  const url = desktopArchive(product, channel, version);
+  const url = desktopDownload(product, channel, version);
   return { channel, product, name, version, size_bytes, sha256, sequence, url, checksum: url + '.sha256' };
 });
 
