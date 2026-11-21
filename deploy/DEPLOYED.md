@@ -1,4 +1,16 @@
-# 当前网站部署：CLI 实拍展区
+# 官网部署记录
+
+## 2026-11-21　StormHub 和 StormForge 下载上线
+
+北京时间 23:28，正式站切换到 `e8c491420c6e314ce2fd6d3b64cc4f4e79b8f1d9`。首页提供 Windows 下载入口，下载页提供 dist 和 beta 两个通道的 StormHub、StormForge ZIP、精确字节数和 SHA-256。安装指南涵盖首次安装、切换通道、更新和修复。
+
+- 静态包 `stormforge-site-e8c491420c6e.tar.gz`，1,353,947 字节，SHA-256 为 `46e91f2824b83ee66f052f9470504faa8f4b800ceecc21d8ae46bf1f0a37c096`。
+- 网站从 `0243c71c59df` 切换到 `e8c491420c6e`。正式虚拟主机加入网站专用的下载页配置。发行服务继续提供实时清单、通道签名、归档和校验文件。
+- 源站验收覆盖网站、两个下载入口、两通道健康检查和 OAuth 回调。发行工具核对 4 个包、161 条路径。公网读取的首页、下载页、安装指南及 Hub 图标与本地构建逐字节一致，4 个 ZIP 均支持 HTTP 范围下载。
+- 构建及公网文件校验见 [网站 CI](https://github.com/vincentely/StormForge-Toolkit/actions/runs/44919205734) 和 [四个 ZIP 的远程校验](https://github.com/vincentely/StormForge-Toolkit/actions/runs/44919411567)。
+- 上一版网站、虚拟主机及实时列表的回滚回执位于 `/var/backups/stormforge-site/20261121T152837Z-e8c491420c6e-wbbm9uok`。回滚这次部署需一同恢复旧网站链接、虚拟主机配置和实时列表，随后检查配置并重载 nginx。
+
+## 2026-11-06　CLI 实拍展区
 
 2026-11-06 17:12（Asia/Shanghai），经用户授权更新正式官网。地址：https://stormforge.vollagames.com/#showcase。
 
