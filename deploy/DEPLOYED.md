@@ -1,5 +1,13 @@
 # 官网部署记录
 
+## 2026-11-22　StormForge beta 固定下载地址
+
+官网从 `ec2b9d705b84` 切换到 `a85c39819c50`。StormForge beta 的按钮与校验文件使用固定地址，当前版本为 `2026-11-22`，StormHub 更新序号为 `5`。dist 两个按钮继续显示「后续开放」。[官网下载页](https://stormforge.vollagames.com/download/)
+
+- 新 ZIP 为 65,436,501 字节，SHA-256 为 `31bf3eea71af69f1370a53a8412e20d264d18a5753cc703fa45e2fedbbf5daeb`。固定直链和日期链接已从公网整包下载并核对，旧日期链接仍支持范围下载。[固定直链](https://stormforge.vollagames.com/downloads/packages/beta/editor/StormForge-beta-Windows-x64.zip)
+- 官网静态包为 `stormforge-site-a85c39819c50.tar.gz`，1,355,177 字节，SHA-256 为 `aa24983e8fc83f0418c1abba60e370e43ccfcb6ad6c6959e1726eb0c5339831c`。旧官网备份为 `/srv/stormforge-site/backups/ec2b9d705b84.tar.gz`。
+- 活动下载快照为 `8e1ec8ae03780ae3975724a3144800434e88bdffa76b19cce4a3fa31f4029bfd`。切换前的完整快照已备份到 `/srv/stormforge/backups/downloads/47d538eab36321e43fce8da2e28f088de79a0be92c86e1f9763eeb6dd6825c7d.tar.gz`，已核对归档摘要及其中的旧版 beta ZIP。
+
 ## 2026-11-21　稳定版网页下载暂缓开放
 
 北京时间 23:46，正式网站从 `e8c491420c6e` 切换到 `ec2b9d705b84b58406cb5692b7ec9876e39f9479`。各下载页的 dist 产品按钮显示「后续开放」对话框，beta 提供原有 ZIP 与 SHA-256。两个通道的桌面更新清单已逐字节核对。
