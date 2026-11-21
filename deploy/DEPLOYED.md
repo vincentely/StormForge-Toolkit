@@ -1,5 +1,13 @@
 # 官网部署记录
 
+## 2026-11-21　稳定版网页下载暂缓开放
+
+北京时间 23:46，正式网站从 `e8c491420c6e` 切换到 `ec2b9d705b84b58406cb5692b7ec9876e39f9479`。各下载页的 dist 产品按钮显示「后续开放」对话框，beta 提供原有 ZIP 与 SHA-256。两个通道的桌面更新清单已逐字节核对。
+
+- 静态包 `stormforge-site-ec2b9d705b84.tar.gz`，1,354,994 字节，SHA-256 为 `162da67357aa4ead32be93a4ffe6aa54bc2f7945de6db65d3797bd2bc3eeb730`。
+- 官网及旧入口 `/downloads/`、`/downloads/index.html` 直接返回相同网页。公网已核对两个 beta 包的范围下载和校验文件。
+- 回滚回执位于 `/var/backups/stormforge-site/20261121T154607Z-ec2b9d705b84-5rp4__z0`，包含旧网站链接和网站下载路由配置。
+
 ## 2026-11-21　StormHub 和 StormForge 下载上线
 
 北京时间 23:28，正式站切换到 `e8c491420c6e314ce2fd6d3b64cc4f4e79b8f1d9`。首页提供 Windows 下载入口，下载页提供 dist 和 beta 两个通道的 StormHub、StormForge ZIP、精确字节数和 SHA-256。安装指南涵盖首次安装、切换通道、更新和修复。
