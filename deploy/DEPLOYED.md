@@ -1,5 +1,13 @@
 # 官网部署记录
 
+## 2026-11-22　StormForge beta 同日更新
+
+StormForge Windows x64 beta 当天的下载包已更新至序号 `6`，含 StormForge MCP 0.99 和 Unity 接收端参考实现。发布源码为 `a10bd4bdbcd1486cecd029870dede15d44e83fc1`。官网的固定地址和日期地址均已从公网完整下载，大小同为 65,832,445 字节，SHA-256 为 `2821beedf7ae8dd04c4d71bc575516bd1ed315099e8d10a210f32bdc2840421e`。[官网下载页](https://stormforge.vollagames.com/download/)
+
+下载快照为 `9d42881f21ea8fcca7332e99148fc7384f3630ddac785c02f238fb8ec95eb20e`。线上官网构建为 `ce71c9b6ec92`，静态包 SHA-256 为 `786f7f2fd6c2454fa82f301cd39147df8a8b8632a42ee7b22d294c61a3e4dd42`。两个下载入口、校验文件、签名清单与网页所示的摘要已核对。
+
+官方 StormHub 已将同一隔离安装从序号 5 原地升级到 6。前两次下载遇到 Windows 12002 超时，正常重试后返回成功，安装状态为健康。安装后的 Editor 和 MCP 文件摘要均与签名清单一致。
+
 ## 2026-11-22　StormForge beta 固定下载地址
 
 官网从 `ec2b9d705b84` 切换到 `a85c39819c50`。StormForge beta 的按钮与校验文件使用固定地址，当前版本为 `2026-11-22`，StormHub 更新序号为 `5`。dist 两个按钮继续显示「后续开放」。[官网下载页](https://stormforge.vollagames.com/download/)
