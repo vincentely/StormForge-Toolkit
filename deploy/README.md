@@ -16,7 +16,7 @@
 取得上游正式签名通道指针及实际 ZIP 后，只更新对应产品的日期、序号、字节数与小写 SHA-256。
 beta StormForge 的按钮和校验文件始终使用
 `https://stormforge.vollagames.com/downloads/packages/beta/editor/StormForge-beta-Windows-x64.zip`
-及其 `.sha256`，无 JavaScript 时也一样。日期包保留为不可变核验输入；发布前运行
+及其 `.sha256`，无 JavaScript 时也一样。StormForge 同日期的新序号会同步替换日期包和固定入口。发布前运行
 `node scripts/verify-remote.mjs`，完整下载并核对日期包和固定入口的字节与哈希。
 浏览器刷新仍先验签通道指针及序号，再比较日期包与固定入口的大小和校验文件，全部一致才更新页面元数据。
 网页浏览不重新下载整个 ZIP；归档字节完整性由上述正式发布核验完成。

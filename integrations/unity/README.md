@@ -1,14 +1,9 @@
-# Unity 集成：公开快照尚未发行
+# Unity 接收端
 
-来源：StormForge `984837c730f18459d4e21a86c27f225389deb8c1`，`Packages/com.stormforge.unity/package.json`、`tools/distribution/Unity-README.md`，打包脚本第 581–582 行。
+StormForge Windows beta 通过内置 MCP 提供接入规范、机器可读协议和 Unity 参考源码。开发版本为 0.99，UPM 包名为 `com.stormforge.unity`，清单版本为 `0.99.0`。
 
-- 上游版本：1.2.0；SFM 0.99。
-- 支持目标：Unity 2022.3、URP 14.0.12、Newtonsoft JSON 3.2.1。未承诺其他版本。
-- 许可：尚未找到一方明确公开许可；未复制插件内容。本目录 README 采用仓库 MIT，不能推定插件许可。
-- 当前文件范围：仅本说明。候选为上游完整 UPM 包，正式快照前须审核逐文件清单、依赖与许可证。
+Agent 用 `resources/list` 发现资源，再用 `resources/read` 读取 `stormforge://transfer/receiver/unity-reference`。参考包使用 Unity 2022.3、URP 14.0.12 和 Newtonsoft JSON 3.2.1。自写接收端可按协议登记自己的版本，通过 StormForge MCP 完成预检、重建与回执查询。
 
-取得未来经授权的正式包后，将 com.stormforge.unity 复制到项目 Packages/，或通过 Package Manager 的 Add package from disk 选择 package.json。将完整 SFM 目录放入 Assets/，保留 .sfmb/.ktx2 依赖并选择 .sfm 导入。运行时使用 Unity 原生资产，不直接解析 SFM。
+本目录仅维护公开接入说明。参考包通过 StormForge 提供，其许可独立于本仓库文档的 MIT 许可。
 
-限制：公开许可证、对应正式 Release、文件哈希清单和公开验证结果尚缺。不得安装不存在的本仓库包，不得引入 Library、Temp、缓存、游戏资源或未经审核的二进制。所有权迁移前仅做正式 Release 发行快照，不在本仓库修改插件功能，不做双向同步。
-
-2026-10-20 元数据复核：上游提交 `494d132a768736a1656d16c9cf50e7dd82c34f50` 的 package.json 版本为 **1.3.0**，声明支持 SFM 0.99 与 required-feature SFM 1.0（SFMB 0.99）；Unity/URP/Newtonsoft 目标未变。此前 1.2.0 记录仅对应初次审计。本仓库仍未导入插件源码，公开发行许可阻塞不变。
+来源为 StormForge 提交 `54ba0cb4b` 中的 `Packages/com.stormforge.unity/package.json` 和 `docs/EngineTransferReceiver.md`。

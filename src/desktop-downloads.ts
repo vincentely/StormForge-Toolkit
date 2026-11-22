@@ -41,16 +41,18 @@ async function refreshCard(card: HTMLElement, key: CryptoKey) {
   const unchanged = tip.version === saved.version && tip.sequence === saved.sequence;
   const stableEntry = product === 'editor' && channel === 'beta';
   if (unchanged && !stableEntry) return;
-  if (!unchanged && (tip.sequence === saved.sequence || tip.version === saved.version)) throw new Error('Release identity was reused');
+  if (!unchanged && (tip.sequence === saved.sequence || (product !== 'editor' && tip.version === saved.version))) {
+    throw new Error('Release identity was reused');
+  }
 
-  const immutableUrl = desktopArchive(product, channel, tip.version);
-  const { length, sha256 } = await archiveMetadata(immutableUrl);
+  const datedUrl = desktopArchive(product, channel, tip.version);
+  const { length, sha256 } = await archiveMetadata(datedUrl);
   const url = desktopDownload(product, channel, tip.version);
   if (stableEntry) {
     const current = await archiveMetadata(url);
     if (current.length !== length || current.sha256 !== sha256 ||
         (unchanged && (length !== saved.size_bytes || sha256 !== saved.sha256))) {
-      throw new Error('Stable download does not match the immutable release');
+      throw new Error('Stable download does not match the dated release');
     }
   }
   const link = card.querySelector<HTMLAnchorElement>('a[data-sha256]')!;
