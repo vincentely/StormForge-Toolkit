@@ -1,0 +1,170 @@
+---
+const chapters = [
+  { id: 'observe', title: '观物', line: '看见形，听见声', description: '从玩家眼前的画面、耳边的声音开始。' },
+  { id: 'trace', title: '格物', line: '解析并索引游戏资源', description: '沿着引用，找到画面与声音的来处。' },
+  { id: 'open', title: '开物', line: '拆开来看，理解原理', description: '追问一个设计为何有效，又是怎样做成的。' },
+  { id: 'make', title: '造物', line: '把理解变成自己的作品', description: '带着学到的原理，设计新的游戏或 Mod。' },
+];
+---
+<bell-study>
+  <section class="philosophy" aria-labelledby="philosophy">
+    <div class="wrap">
+      <h2 class="rail-heading" id="philosophy">产品设计哲学</h2>
+      <nav class="chapters" aria-label="产品设计哲学的四个层次">
+        {chapters.map(({id, title, line, description}) => <a class:list={['chapter', { core: id === 'open' }]} href={'#' + id} id={'tab-' + id} data-chapter={id}>
+          <span class="chapter-top"><strong>{title}</strong><span class="chapter-arrow" aria-hidden="true">↘</span></span>
+          <span class="chapter-line">{line}</span><span class="chapter-description">{description}</span>
+        </a>)}
+      </nav>
+    </div>
+  </section>
+
+  <section class="study wrap" aria-labelledby="study-title">
+    <header class="study-head">
+      <p class="section-kicker">原创机关研究 · 山门鸣钟</p>
+      <h2 id="study-title">一声钟响，山门为什么会开？</h2>
+      <p>先当一回玩家，再沿着声音、动作和触发条件，看看设计者做了哪些决定。</p>
+    </header>
+    <div class="workbench">
+      <div class="case-visual">
+        <figure class="case-figure">
+          <img class="case-art" src="/images/philosophy/mountain-gate-cutaway.webp" alt="钟亭的屋顶和横梁分层展开，木门从石砌的门框中升起。" width="1080" height="810" loading="lazy" decoding="async" data-cutaway />
+          <img class="case-art" src="/images/philosophy/mountain-gate.webp" alt="从玩家视角望向山林中的木门和钟亭。" width="1760" height="880" loading="lazy" decoding="async" data-landscape hidden />
+          <figcaption data-caption>原创概念插画 · 钟亭与山门的分解视图</figcaption>
+        </figure>
+        <div class="playback" data-playback hidden>
+          <div class="mechanism" aria-hidden="true"><span class="bell-icon" data-bell-icon></span><div class="gate-icon" data-gate><span></span></div></div>
+          <div class="readout"><span>机关运行示意</span><p data-state role="status" aria-live="polite" aria-atomic="true">山门已关闭</p></div>
+          <div class="play-actions"><button class="strike" type="button" data-ring>敲钟</button><button class="reset" type="button" data-reset>复位</button></div>
+        </div>
+      </div>
+
+      <div class="panels">
+        <section class="case-panel" id="observe" aria-labelledby="tab-observe">
+          <p class="panel-kicker">观物 <span>/ 玩家视角</span></p>
+          <h3>先听一声，再看门动。</h3>
+          <p>站在山门前，你能看见铜钟、木门和两者之间的小路。敲一下钟，余音还在，木门就开始升起。</p>
+          <dl class="notes"><div><dt>眼睛看到</dt><dd>钟亭在近处，挡住去路的山门在远处。</dd></div><div><dt>耳朵听到</dt><dd>先是一声清楚的敲击，随后是渐弱的低鸣。</dd></div></dl>
+          <p class="takeaway">观察时先记下发生的先后，给“为什么”留一个位置。</p>
+        </section>
+        <section class="case-panel" id="trace" aria-labelledby="tab-trace">
+          <p class="panel-kicker">格物 <span>/ 资源索引</span></p>
+          <h3>把刚才那个瞬间，列成一份索引。</h3>
+          <p>在真实游戏里，先解析来源，再按名称、类型和引用找线索。下面是这个原创机关用到的三条关系。</p>
+          <div class="relations">
+            <details open><summary>铜钟 <span>→</span> 敲击事件</summary><p>玩家操作铜钟时产生一次敲击。发声与计数都从这里开始。</p></details>
+            <details><summary>敲击事件 <span>→</span> 钟声</summary><p>每次敲击都会重新播放同一段声音，山门是否开启可独立判断。</p></details>
+            <details><summary>敲击计数 <span>→</span> 山门动作</summary><p>达到规定次数后，机关按设定的延迟升门。复位会清零计数并关门。</p></details>
+          </div>
+        </section>
+        <section class="case-panel" id="open" aria-labelledby="tab-open">
+          <p class="panel-kicker">开物 <span>/ 制作原理</span></p>
+          <h3>让声音先回答玩家。</h3>
+          <p>把这个机关像盒子一样拆开。敲击同时做两件事，一是让铜钟发声，二是让门检查开启条件。</p>
+          <ol class="sequence">
+            <li><span>敲击时</span><div><strong>发出钟声</strong><p>先给玩家一个清楚的回应。</p></div></li>
+            <li><span>同一刻</span><div><strong>检查次数</strong><p>默认敲一次就满足开门条件。</p></div></li>
+            <li><span>0.45 秒后</span><div><strong>木门升起</strong><p>留一点间隔，让人把远处的变化和刚才的动作联系起来。</p></div></li>
+          </ol>
+        </section>
+        <section class="case-panel" id="make" aria-labelledby="tab-make">
+          <p class="panel-kicker">造物 <span>/ 自己动手</span></p>
+          <h3>同一口钟，换一种玩法。</h3>
+          <p>让门在第二声才开启，或让它立即回应。改完再敲一次，体会相同的画面怎样产生不同的节奏。</p>
+          <fieldset class="recipe" data-recipe hidden><legend>你的机关规则</legend>
+            <label>开门需要<select data-count><option value="1">敲一下</option><option value="2" selected>敲两下</option></select></label>
+            <label>开门延迟<select data-delay><option value="0">立即</option><option value="450" selected>0.45 秒</option><option value="900">0.9 秒</option></select></label>
+          </fieldset>
+          <p class="takeaway">把这个原理带回自己的引擎，换上自己有权使用的素材，就能设计新游戏或 Mod 里的下一道门。</p>
+        </section>
+        <a class="case-next" href="#make" data-next hidden>下一层 · 造物 →</a>
+      </div>
+    </div>
+    <p class="sound-message" data-sound-message role="status" hidden></p>
+    <noscript><p class="no-script">你可以直接收听示例的钟声。开启 JavaScript 后可以敲钟、观察开门并改变机关规则。</p><audio controls preload="none" src="/images/philosophy/mountain-bell.wav"></audio></noscript>
+    <audio data-bell preload="none" src="/images/philosophy/mountain-bell.wav"></audio>
+  </section>
+</bell-study>
+<script>
+  import '../bell-study';
+</script>
+<style>
+  bell-study { display: block; }
+  .philosophy { background: var(--surface); border-bottom: 1px solid var(--line); padding: 1.15rem 0 1.65rem; }
+  .rail-heading { color: var(--muted); font: 600 .78rem/1.5 var(--sans); letter-spacing: .11em; margin-bottom: .8rem; }
+  .chapters { display: grid; grid-template-columns: 1fr 1.06fr 1.28fr 1fr; gap: clamp(.85rem,2.6vw,2.5rem); }
+  .chapter { display: grid; grid-template-rows: auto auto 1fr; align-content: start; gap: .2rem; padding: 0 0 .25rem clamp(.8rem,1.75vw,1.65rem); border-left: 1px solid var(--line); text-decoration: none; }
+  .chapter:first-child { border-left: 0; padding-left: 0; }
+  .chapter-top { display: flex; gap: .5rem; align-items: baseline; min-height: 3.35rem; }
+  .chapter strong { align-self: end; font: 500 2.28rem/1.15 var(--display); letter-spacing: -.045em; color: var(--text); }
+  .chapter:nth-child(2) strong { font-size: 2.55rem; }
+  .chapter.core strong { color: var(--accent); font-size: 3.12rem; }
+  .chapter-arrow { opacity: 0; color: var(--accent); font: 1.16rem var(--sans); }
+  .chapter:hover .chapter-arrow,.chapter:focus-visible .chapter-arrow,.chapter[aria-selected=true] .chapter-arrow { opacity: 1; }
+  .chapter-line { font-size: .91rem; font-weight: 650; color: var(--text); }
+  .chapter-description { color: var(--muted); font-size: .8rem; line-height: 1.65; text-wrap: pretty; }
+  .study { padding-block: clamp(2.75rem,5.5vw,5.8rem); }
+  .study-head { margin-bottom: clamp(1.3rem,2.5vw,2.2rem); }
+  .study-head h2 { font: 500 clamp(2rem,3.7vw,3.5rem)/1.25 var(--display); letter-spacing: -.045em; }
+  .study-head > p:last-child { margin-top: .63rem; font-size: .97rem; color: var(--prose); }
+  .workbench { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); background: var(--surface); border: 1px solid var(--line); }
+  .case-visual { display: flex; flex-direction: column; min-width: 0; background: #e8ddc4; }
+  .case-figure { position: relative; flex: 1; display: grid; min-height: 0; align-items: center; overflow: hidden; }
+  .case-art { grid-area: 1/1; width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+  .case-art[data-landscape] { object-position: 72% center; }
+  .case-figure figcaption { position: absolute; bottom: 0; left: 0; max-width: 100%; background: rgb(33 41 31 / 85%); color: #f6f0dd; font-size: .73rem; padding: .25rem .72rem; }
+  .playback { display: flex; align-items: center; gap: .78rem; padding: .88rem clamp(.8rem,1.8vw,1.6rem); color: #f5eedb; background: #253932; }
+  .mechanism { display: flex; flex: none; align-items: center; gap: .55rem; padding: .27rem .1rem; }
+  .bell-icon { flex: none; width: 20px; height: 27px; transform-origin: 50% 6%; background: linear-gradient(90deg,#a17a48,#e0bf82 52%,#ac8759); clip-path: polygon(44% 0,56% 0,60% 10%,73% 17%,80% 32%,83% 63%,100% 83%,100% 89%,58% 89%,54% 100%,46% 100%,42% 89%,0 89%,0 83%,17% 63%,20% 32%,27% 17%,40% 10%); }
+  .gate-icon { flex: none; width: 34px; height: 38px; position: relative; overflow: hidden; border: 2px solid #a8ad91; border-bottom: 0; border-radius: 9px 9px 0 0; }
+  .gate-icon span { position: absolute; inset: 1px 2px -1px; background: repeating-linear-gradient(90deg,#bc9870 0 3px,#6b604c 3px 5px); border-bottom: 2px solid #ba9e75; transition: transform .65s ease-in-out; }
+  .gate-icon.is-open span { transform: translateY(-105%); }
+  .readout { min-width: 0; }.readout > span { display: block; color: #c2cdbb; font-size: .69rem; line-height: 1.3; }
+  .readout p { font-size: .86rem; line-height: 1.55; }
+  .play-actions { display: flex; align-items: center; gap: .3rem; margin-left: auto; flex: none; }
+  .play-actions button { min-height: 40px; border-radius: 2px; padding: .32rem .84rem; font-size: .83rem; font-weight: 650; }
+  .strike { background: #f0dbad; color: #25352d; border: 1px solid #f0dbad; }
+  .reset { background: transparent; color: #f3eddc; border: 1px solid #829382; }
+  .play-actions button:hover { filter: brightness(1.15); }
+  .panels { padding: clamp(1.3rem,3vw,3.2rem); border-left: 1px solid var(--line); }
+  .case-panel + .case-panel { margin-top: 2rem; }
+  bell-study[data-ready] .case-panel + .case-panel { margin-top: 0; }
+  .panel-kicker { color: var(--accent); font-weight: 680; font-size: .87rem; letter-spacing: .055em; }
+  .panel-kicker span { color: var(--muted); font-size: .8rem; font-weight: 450; }
+  .case-panel h3 { font: 500 clamp(1.65rem,2.65vw,2.55rem)/1.3 var(--display); margin: .62rem 0 .72rem; letter-spacing: -.035em; }
+  .case-panel > p:not(.panel-kicker) { color: var(--prose); font-size: .95rem; }
+  .sequence,.notes,.relations,.recipe { margin: 1.2rem 0 0; padding: 0; }
+  .sequence { list-style: none; }
+  .sequence li,.notes > div { border-top: 1px solid var(--line); display: grid; grid-template-columns: 5.1rem minmax(0,1fr); gap: .8rem; padding: .64rem 0; }
+  .sequence li > span,.notes dt { color: var(--accent); font-size: .81rem; font-weight: 630; padding-top: .1rem; }
+  .sequence strong { font-size: .94rem; }.sequence p,.notes dd,.relations p { margin: 0; color: var(--muted); font-size: .88rem; line-height: 1.65; }
+  .relations details { border-top: 1px solid var(--line); padding: .56rem 0; }
+  .relations summary { cursor: pointer; font-size: .95rem; font-weight: 610; }.relations summary span { color: var(--accent); padding-inline: .3rem; }
+  .relations p { margin: .25rem 0 .14rem 1rem; }
+  .recipe { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; border: 0; }
+  .recipe legend { padding: 0; font-weight: 600; font-size: .9rem; margin-bottom: .5rem; }
+  .recipe label { display: grid; gap: .22rem; color: var(--muted); font-size: .82rem; }
+  .recipe select { background: var(--bg); color: var(--text); border: 1px solid var(--line); border-radius: 2px; padding: .42rem; min-height: 40px; }
+  .case-panel > .takeaway { border-left: 2px solid var(--accent); padding-left: .8rem; margin-top: 1.2rem; }
+  .case-next { display: inline-flex; align-items: center; min-height: 40px; margin-top: .6rem; font-size: .85rem; font-weight: 630; color: var(--accent); text-decoration: none; }
+  .case-next:hover { text-decoration: underline; }
+  .sound-message,.no-script { color: var(--muted); font-size: .85rem; margin-top: .85rem; }
+  @media(max-width:800px) {
+    .chapters { gap: .75rem; }
+    .chapter { padding-left: .7rem; }
+    .case-art { min-height: 245px; }
+    .workbench { grid-template-columns: 1fr 1.1fr; }.panels { padding: 1.1rem; }
+  }
+  @media(max-width:690px) {
+    .philosophy { padding: 1.1rem 0 1.2rem; }
+    .chapters { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem 1.2rem; }
+    .chapter { border: 0; padding: 0 0 .1rem; }
+    .chapter:nth-child(n+3) { padding-top: .74rem; border-top: 1px solid var(--line); }
+    .chapter-top { min-height: 2.55rem; }
+    .chapter strong { font-size: 1.88rem; }.chapter:nth-child(2) strong { font-size: 2.09rem; }.chapter.core strong { font-size: 2.58rem; }
+    .chapter-description { font-size: .77rem; }.chapter-line { font-size: .84rem; }
+    .workbench { grid-template-columns: 1fr; }.panels { border: 0; padding: 1.35rem 1.13rem 1.55rem; }
+    .case-art { min-height: 0; aspect-ratio: 3/2; }.study-head h2 { font-size: clamp(1.72rem,6vw,2.15rem); }
+  }
+  @media(max-width:360px) { .playback { gap: .42rem; }.play-actions button { padding-inline: .55rem; }.recipe { gap: .45rem; }.gate-icon { width: 25px; height: 31px; }.mechanism { gap: .28rem; }.bell-icon { width: 15px; height: 22px; } }
+</style>

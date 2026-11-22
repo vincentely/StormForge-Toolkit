@@ -7,19 +7,22 @@ const integrations = desktopChannels.filter(channel => channel.webDownload).flat
   const manifest = readChannel(channel.id === 'dist' ? 'stable' : channel.id);
   return manifest ? [manifest] : [];
 });
+const channels = [...desktopChannels].sort((a, b) => Number(b.webDownload) - Number(a.webDownload));
 const bytes = new Intl.NumberFormat('zh-CN');
 const size = (value: number) => value < 1048576
   ? `${(value / 1024).toFixed(0)} KiB` : `${(value / 1048576).toFixed(1)} MiB`;
 ---
 <Layout title="下载 StormHub 和 StormForge" description="下载 Windows x64 测试版 StormHub 和 StormForge。稳定版下载将于后续开放。">
   <header class="page-head">
-    <h1>下载 StormHub 和 StormForge</h1>
+    <p class="eyebrow">Windows x64</p>
+    <h1>下载 StormForge</h1>
     <p class="lead">首次使用，下载 StormHub 并解压，双击 <code>StormHub.exe</code> 即可安装和更新 StormForge。也可以单独下载 StormForge 便携版。</p>
   </header>
   <div class="download-grid">
-    {desktopChannels.map(({ id, label, webDownload }) => (
+    {channels.map(({ id, label, webDownload }) => (
       <section class="release-card" aria-labelledby={id}>
         <h2 id={id}>{label} <span>{id}</span></h2>
+        <p class="channel-caption">{webDownload ? '当前可从官网下载。首次安装建议使用 StormHub。' : '稳定版开放后，可在这里取得对应安装包。'}</p>
         {desktopPackages.filter(p => p.channel === id).map(p => (
           <article class="download-product" data-product={p.product} data-channel={id}>
             <div class="product-name">
@@ -71,7 +74,9 @@ const size = (value: number) => value < 1048576
 <style>
   .download-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
   .download-grid .release-card { margin: 0; padding: clamp(20px, 3vw, 38px); }
-  .release-card h2 { margin: 0 0 18px; }
+  .release-card h2 { margin: 0; font: 550 clamp(1.7rem,2.6vw,2.4rem)/1.3 var(--display); }
+  .channel-caption { margin: .45rem 0 1.1rem; color: var(--muted); font-size: .89rem; }
+  .release-card:has(#dist) button { background: var(--wash); border-color: var(--line); color: var(--prose); }
   .release-card h2 span { font: normal .95rem Consolas, monospace; color: var(--muted); }
   .download-product { padding-block: 22px; border-top: 1px solid var(--line); min-width: 0; }
   .download-product:last-child { padding-bottom: 0; }

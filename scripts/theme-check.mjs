@@ -6,7 +6,7 @@ const browser = await chromium.launch(process.env.PLAYWRIGHT_CHANNEL ? { channel
 const base = 'http://127.0.0.1:4321';
 mkdirSync('artifacts/visual', { recursive: true });
 const background = page => page.evaluate(() => getComputedStyle(document.documentElement).backgroundColor);
-const colors = { light: 'rgb(247, 248, 250)', dark: 'rgb(17, 21, 25)' };
+const colors = { light: 'rgb(247, 244, 235)', dark: 'rgb(25, 38, 34)' };
 try {
   const context = await browser.newContext({ colorScheme: 'light' });
   const page = await context.newPage();

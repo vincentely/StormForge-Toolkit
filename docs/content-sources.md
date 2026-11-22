@@ -101,3 +101,13 @@ Hub 发布构建来源为 `95b71a2de`，StormForge 为 `94e3cd035`。网站公�
 ## 游戏支持清单
 
 2026-11-22 的公开清单对应 StormForge 提交 `95d798bcce82c952f10066ee118e4311d26a9f76`。`src/supported-games.md` 同步上游 README 的 Source Coverage 表格，官网功能页直接渲染该文件。具名游戏与通用来源的分类取自 GameRegistry，索引域取自 CatalogIndexerRegistry，场景范围按 World Explorer 的实际入口和启动条件核对。Editor 帮助中的本机来源与索引进度只在用户设备上显示。
+
+## 首页原创机关「山门鸣钟」
+
+2026-11-22 为官网四层产品哲学设计了独立的交互示例。首页把两幅 AI 生成的原创插画标为概念插画。玩家视角与分解视图共同说明钟亭和山门的关系。敲击次数、开门延迟和状态反馈由网页运行。钟声由正弦分音与短反射合成，时长 3 秒。示例在浏览器本地执行。实机预览区继续使用上文登记的四张 StormForge 截图。
+
+| 发布文件 | 用途 | SHA-256 |
+| --- | --- | --- |
+| `mountain-gate.webp` | 玩家视角，1760 × 880 | `3c54232c3f6fbf3c67e314830574672ab2b07561c776c66e77f31dbfe52ba9d6` |
+| `mountain-gate-cutaway.webp` | 机关分解图，1080 × 810 | `8a93910dab317f3a6f26694a8713912654d7a9cfacf43bbc2ab5a9ed043943e3` |
+| `mountain-bell.wav` | 单声道 32 kHz、16 位 PCM | `3a3b703f32c509c7c64a6437e68edd5da144780b78db37e716ed59eb002ea138` |

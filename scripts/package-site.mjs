@@ -9,7 +9,7 @@ function inspect(dir) {
     const file=join(dir,name), s=lstatSync(file);
     if(s.isSymbolicLink()) throw new Error(`Symlink forbidden: ${file}`);
     if(s.isDirectory()) inspect(file);
-    else if(!/\.(html|css|js|json|svg|png|webp|jpg|txt|xml|ico|woff2)$/.test(name)) throw new Error(`Unexpected website file: ${file}`);
+    else if(!/\.(html|css|js|json|svg|png|webp|jpg|wav|txt|xml|ico|woff2)$/.test(name)) throw new Error(`Unexpected website file: ${file}`);
   }
 }
 inspect('dist');

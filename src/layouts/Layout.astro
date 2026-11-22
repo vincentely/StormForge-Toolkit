@@ -3,7 +3,8 @@ import '../styles/global.css';
 import { site } from '../site';
 interface Props { title: string; description: string }
 const { title, description } = Astro.props;
-const links = [['/', '概览'], ['/features/', '功能'], ['/download/', '下载'], ['/docs/', '入门文档']];
+const links = [['/', '设计哲学'], ['/features/', '游戏支持'], ['/docs/', '使用文档'], ['/download/', '下载']];
+const home = Astro.url.pathname === '/';
 const is404 = Astro.url.pathname.startsWith('/404');
 ---
 <!doctype html>
@@ -13,7 +14,7 @@ const is404 = Astro.url.pathname.startsWith('/404');
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} · {site.name}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#111519" />
+    <meta name="theme-color" content="#192622" />
     <meta name="color-scheme" content="light dark" />
     <script is:inline src="/theme.js"></script>
     {!is404 && <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />}
@@ -28,8 +29,8 @@ const is404 = Astro.url.pathname.startsWith('/404');
   </head>
   <body>
     <a class="skip" href="#main">跳至正文</a>
-    <header class="header wrap">
-      <a href="/" class="brand" aria-label={`${site.name}首页`}><img class="brand-icon" src={site.icon} alt="" width="36" height="36" />{site.name}<span class="brand-sub">STORMFORGE</span></a>
+    <header class="site-bar"><div class="header wrap">
+      <a href="/" class="brand" aria-label={`${site.name}首页`}><img class="brand-icon" src={site.icon} alt="" width="34" height="34" /><span>{site.name}</span><span class="brand-sub">StormForge</span></a>
       <nav aria-label="主导航">{links.map(([url, label]) => <a href={url} aria-current={Astro.url.pathname === url ? 'page' : undefined}>{label}</a>)}</nav>
       <label class="theme-control" hidden><span class="theme-label">外观</span>
         <select id="theme-select" aria-label="颜色主题">
@@ -38,15 +39,15 @@ const is404 = Astro.url.pathname.startsWith('/404');
           <option value="dark">深色</option>
         </select>
       </label>
-    </header>
-    <main id="main" class="wrap"><slot /></main>
-    <footer class="wrap footer">
-      <div><a href="/" class="footer-brand">{site.name}</a><p>探索资源，理解结构。</p><p class="fine">StormForge · 本地游戏资源研究与预览工具</p></div>
+    </div></header>
+    <main id="main" class:list={[home ? 'home-main' : 'wrap inner-main']}><slot /></main>
+    <footer class="site-footer"><div class="wrap footer">
+      <div><a href="/" class="footer-brand">{site.name} <span>StormForge</span></a><p>游戏资源研究与预览工具</p></div>
       <div class="footer-links"><a href="/privacy/">隐私说明</a><a href="/terms/">使用说明</a><a href="/contact/">联系方式</a><a href="https://github.com/vincentely/StormForge-Toolkit">GitHub</a></div>
       <div class="legal-status">
         <div class="legal-links"><span>{site.operator}</span><a href={`mailto:${site.email}`}>{site.email}</a><a href={site.icpUrl} target="_blank" rel="noopener noreferrer">{site.icp}</a></div>
         <p>StormForge 不分发原游戏资源。产品版本与获取方式请查看发行页面。</p>
       </div>
-    </footer>
+    </div></footer>
   </body>
 </html>

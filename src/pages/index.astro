@@ -1,90 +1,107 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { site } from '../site';
+import BellStudy from '../components/BellStudy.astro';
 
 const captures = [
-  { file: 'jaina-cone-of-cold', game: '风暴英雄', type: '角色 · 离屏渲染', title: '吉安娜', alt: '吉安娜屈膝施展寒冰锥，一手将冰晶法杖斜举向前，另一手张开。', width: 1104, height: 621 },
-  { file: 'blademaster', game: '魔兽争霸 III', type: '角色 · 离屏渲染', title: '兽族剑圣', alt: '兽族剑圣手握宽刃长刀，背着蓝色战旗。', width: 960, height: 540 },
-  { file: 'human-campaign', game: '魔兽争霸 III', type: '场景 · 视口截图', title: '人族战役第一章', alt: '从斜上方俯瞰人族村镇、林地与穿过地图的河流。', width: 560, height: 315 },
-  { file: 'azeroth', game: '魔兽世界', type: '场景 · 视口截图', title: '艾泽拉斯山林', alt: '林间小径穿过针叶林，远处是浅色岩峰和蓝天。', width: 928, height: 522 },
+  { file: 'jaina-cone-of-cold', game: '风暴英雄', type: '角色动作', title: '吉安娜 · 寒冰锥', question: '法杖、目光和伸出的手，怎样交代施法方向？', alt: '吉安娜屈膝将冰晶法杖斜举向前，另一只手张开。', width: 1104, height: 621 },
+  { file: 'blademaster', game: '魔兽争霸 III', type: '角色造型', title: '兽族剑圣', question: '只看长刀和背旗的轮廓，还能认出这个角色吗？', alt: '兽族剑圣手握宽刃长刀，背着蓝色战旗。', width: 960, height: 540 },
+  { file: 'human-campaign', game: '魔兽争霸 III', type: '关卡布局', title: '人族战役第一章', question: '沿着河流、林地和村镇，玩家会先看到哪里？', alt: '从斜上方俯瞰人族村镇、林地与穿过地图的河流。', width: 560, height: 315 },
+  { file: 'azeroth', game: '魔兽世界', type: '环境设计', title: '艾泽拉斯山林', question: '前景的树和远处的岩峰，怎样把一条路引向深处？', alt: '林间小径穿过针叶林，远处是浅色岩峰和蓝天。', width: 928, height: 522 },
 ];
 ---
-<Layout title="探索资源，理解结构" description="开物有方，StormForge 产品介绍。面向本地合法安装的游戏，提供资源索引、模型与动画预览、材质和来源信息检查，让资源研究更直观。">
-  <section class="hero">
-    <div>
-      <p class="eyebrow">开物有方 / STORMFORGE</p>
-      <h1>探索资源，<br />理解结构。</h1>
-      <p class="lead">用 StormForge 查看和预览本机游戏资源。连接受支持的游戏，查找模型、播放动画、查看材质与场景。用 StormHub 安装、更新和管理 StormForge。</p>
-      <div class="actions">
-        <a class="button primary" href="/download/">下载 Windows 版 <span aria-hidden="true">&nbsp;↓</span></a>
-        <a class="button" href="/features/">了解产品功能</a>
+<Layout title="游戏是怎样做出来的？" description="开物有方 StormForge 面向游戏开发者、设计师和爱好者。看见与听见游戏，解析资源的关系，拆开制作原理，再把理解带回自己的游戏与 Mod。">
+  <section class="hero" aria-labelledby="home-title">
+    <img class="hero-art" src="/images/philosophy/mountain-gate.webp" alt="山道通向林中的木门，近处钟亭里悬着一口铜钟。" width="1760" height="880" fetchpriority="high" />
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="hero-content wrap">
+      <div class="hero-copy">
+        <p class="hero-kicker">StormForge <span aria-hidden="true">/</span> 游戏开发与设计</p>
+        <h1 id="home-title">游戏是怎样<br /><em>做出来的？</em></h1>
+        <p class="hero-lead">从一个画面、一声钟响，追到背后的资源和规则。给做游戏的人，也给想做出第一款游戏的你。</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#observe" data-enter-study>从观物开始 <span aria-hidden="true">↓</span></a>
+          <a class="button quiet" href="/download/#beta">下载 Windows 版</a>
+        </div>
       </div>
-      <p class="fine">Windows x64 · 测试版现已开放 · <a href="/docs/#install">首次安装指南</a></p>
-    </div>
-    <aside class="product-summary" aria-label="StormForge 产品介绍">
-      <div class="product-identity">
-        <img src={site.icon} alt="StormForge 产品图标：青色立方体与金色中心" width="108" height="108" fetchpriority="high" />
-        <div><p class="eyebrow">本地资源工作台</p><h2>StormForge</h2><p>游戏资源研究与预览工具</p></div>
+      <div class="hero-note">
+        <button type="button" class="listen" data-listen aria-pressed="false" hidden><span class="waves" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span data-listen-label>听一声钟</span></button>
+        <p>山门鸣钟 <span>／</span> 原创概念插画</p>
       </div>
-      <dl class="product-facts">
-        <div><dt>连接来源</dt><dd>本机合法安装的受支持游戏</dd></div>
-        <div><dt>观察内容</dt><dd>模型、材质、动画与场景</dd></div>
-        <div><dt>工作方式</dt><dd>只读索引、检查与预览</dd></div>
-      </dl>
-      <p class="fine">可通过 StormHub 安装，也可单独下载便携包。</p>
-    </aside>
-  </section>
-  <section class="section" aria-labelledby="showcase">
-    <div class="section-heading"><h2 id="showcase">CLI 实拍</h2><p>暴雪游戏的经典角色与场景</p></div>
-    <p class="showcase-intro">用 StormForge 命令行捕获角色模型和场景视口，近看服装与武器，也能俯瞰地图布局。</p>
-    <div class="showcase-grid">
-      {captures.map(({ file, game, type, title, alt, width, height }) => (
-        <figure>
-          <img src={`/images/showcase/${file}.webp`} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
-          <figcaption>
-            <p>{game} <span aria-hidden="true">/</span> {type}</p>
-            <h3>{title}</h3>
-          </figcaption>
-        </figure>
-      ))}
-    </div>
-    <p class="fine showcase-credit">画面由 StormForge 预览渲染。游戏、角色与场景的相关权利归其权利人所有。</p>
-  </section>
-  <section class="section" aria-labelledby="capabilities">
-    <div class="section-heading"><h2 id="capabilities">从资源目录，到内容细节。</h2><p>查找 · 预览 · 理解</p></div>
-    <div class="grid">
-      <article class="feature"><span class="number">01 / DISCOVER</span><h3>找到想研究的资源</h3><p>连接本地游戏来源，通过索引、搜索与筛选浏览资源目录，用收藏和集合整理关注的内容。</p></article>
-      <article class="feature"><span class="number">02 / OBSERVE</span><h3>看清模型与动作</h3><p>在预览窗口中观察模型、材质和骨骼动画，调整取景与显示参数，检查不同资源的表现。</p></article>
-      <article class="feature"><span class="number">03 / UNDERSTAND</span><h3>理解来源与结构</h3><p>查看来源格式、资源引用和相关信息，结合诊断结果区分已支持的内容与当前限制。</p></article>
     </div>
   </section>
-  <section class="section" aria-labelledby="workflow">
-    <div class="section-heading"><h2 id="workflow">从本地安装开始</h2><a href="/docs/">查看使用指南 ↗</a></div>
-    <div class="workflow-steps">
-      <div class="step"><span>01</span><div><h3>选择游戏来源</h3><p>确认合法拥有并安装游戏，连接受支持的本地来源。</p></div></div>
-      <div class="step"><span>02</span><div><h3>建立资源索引</h3><p>由你启动索引，再通过目录与搜索找到研究对象。</p></div></div>
-      <div class="step"><span>03</span><div><h3>打开并观察</h3><p>加载资源，查看结构、选择可用动作并检查预览结果。</p></div></div>
+
+  <BellStudy />
+
+  <section class="showcase" aria-labelledby="showcase-title"><div class="wrap">
+    <header class="show-head"><div><p class="section-kicker">StormForge 实际预览</p><h2 id="showcase-title">换一款游戏，接着观察。</h2></div>
+      <a class="text-link" href="/features/#supported-games">查看支持的游戏 <span aria-hidden="true">↗</span></a>
+    </header>
+    <p class="show-intro">从游戏角色的一个动作，到一张关卡的整体布局。这四张画面采自 StormForge 对本机游戏资源的预览。</p>
+    <div class="gallery">
+      {captures.map(capture => <figure>
+        <img src={'/images/showcase/' + capture.file + '.webp'} alt={capture.alt} width={capture.width} height={capture.height} loading="lazy" decoding="async" />
+        <figcaption><p class="capture-meta">{capture.game} <span>／</span> {capture.type}</p><h3>{capture.title}</h3><p class="capture-question">{capture.question}</p></figcaption>
+      </figure>)}
     </div>
-  </section>
-  <section class="section boundary">
-    <h2>只读研究，<br />尊重内容。</h2>
-    <div><p>StormForge 不分发原游戏资源，也不修改游戏资源或客户端。你需要合法拥有并安装受支持的游戏，并确认相关内容的使用权利。</p><p>预览用于学习、研究与检查，不承诺所有资源都受支持，或与原客户端画面完全一致。第三方名称仅用于兼容说明，不代表厂商关联或背书。</p></div>
-  </section>
-  <section class="section contact-strip" aria-labelledby="contact">
-    <div><p class="eyebrow">保持联系</p><h2 id="contact">交流想法，反馈问题。</h2><p>产品咨询、使用反馈与合作联系，欢迎通过邮箱与我们交流。</p></div>
-    <a class="button" href={`mailto:${site.email}`}>{site.email} <span aria-hidden="true">&nbsp;↗</span></a>
+    <p class="credit">游戏、角色与场景的相关权利归各自权利人所有。</p>
+  </div></section>
+
+  <section class="start wrap" aria-labelledby="start-title">
+    <div><p class="section-kicker">从你的游戏库开始</p><h2 id="start-title">打开第一个资源。</h2><p>连接你合法拥有的本机游戏，让 StormForge 建立只读索引。从一个熟悉的名字开始，近看模型、动作或场景。</p></div>
+    <div class="start-actions"><a class="button primary" href="/download/#beta">下载 Windows 测试版 <span aria-hidden="true">↓</span></a><a class="text-link" href="/docs/#first-asset">查看首次使用指南</a></div>
   </section>
 </Layout>
-
 <style>
-  .showcase-intro { color: var(--muted); margin-bottom: 24px; }
-  .showcase-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
-  figure { margin: 0; border: 1px solid var(--line); background: var(--surface); }
-  figure img { display: block; width: 100%; height: auto; }
-  figcaption { padding: 16px 20px; }
-  figcaption p { margin: 0 0 4px; color: var(--muted); font-size: 14px; }
-  figcaption span { color: var(--accent); margin-inline: 4px; }
-  figcaption h3 { margin: 0; }
-  .showcase-credit { margin: 16px 0 0; }
-  @media (max-width: 680px) { .showcase-grid { grid-template-columns: 1fr; gap: 16px; } }
+  .hero { position: relative; isolation: isolate; overflow: hidden; color: #faf2db; background: #243127; }
+  .hero-art,.hero-shade { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero-art { z-index: -2; object-fit: cover; object-position: 55% 55%; }
+  .hero-shade { z-index: -1; background: linear-gradient(90deg,rgba(13,29,24,.9) 0%,rgba(17,32,25,.72) 24%,rgba(19,35,28,.24) 49%,transparent 70%),linear-gradient(0deg,rgba(15,25,20,.48),transparent 30%); }
+  .hero-content { position: relative; min-height: clamp(455px,34.6vw,570px); display: flex; align-items: center; }
+  .hero-copy { width: min(47%,540px); padding-block: 2.75rem 3rem; }
+  .hero-kicker { display: flex; gap: .7rem; align-items: baseline; color: #eee4c7; font: 570 .86rem/1.6 var(--sans); letter-spacing: .055em; }
+  .hero-kicker span { color: #cdb482; }
+  .hero h1 { margin: .82rem 0 .96rem; font: 500 clamp(3.35rem,5.2vw,5.4rem)/1.08 var(--display); letter-spacing: -.055em; text-shadow: 0 1px 15px rgb(0 0 0 / 15%); }
+  .hero h1 em { color: #f3d198; font: inherit; }
+  .hero-lead { max-width: 26em; font-size: clamp(.95rem,1.15vw,1.12rem); line-height: 1.85; color: #eeeedd; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: .68rem; margin-top: 1.45rem; }
+  .hero .primary { color: #2c3024; background: #f1d39b; border-color: #f1d39b; }
+  .hero .quiet { color: #faf5e7; background: rgb(20 37 30 / 65%); border-color: rgb(231 229 194 / 64%); }
+  .hero .quiet:hover { background: #233e33; }
+  .hero-note { color: #f7f2dc; position: absolute; right: 0; bottom: 1.15rem; display: flex; flex-direction: column; align-items: flex-end; gap: .4rem; }
+  .hero-note p { font-size: .72rem; text-shadow: 0 1px 3px #13251c,0 0 8px #152820; }.hero-note p span { color: #e7c68c; }
+  .listen { display: inline-flex; min-height: 40px; align-items: center; gap: .55rem; padding: .35rem .85rem; border: 1px solid rgb(240 232 204 / 75%); background: rgb(25 39 30 / 78%); border-radius: 40px; color: #f9ebcd; font-size: .83rem; }
+  .listen:hover { background: #25392f; }.waves { display: flex; gap: 2px; align-items: center; height: 16px; }
+  .waves i { width: 2px; height: 5px; background: #efd59f; }.waves i:nth-child(2),.waves i:nth-child(4) { height: 10px; }.waves i:nth-child(3) { height: 15px; }
+  .listen[aria-pressed=true] .waves i { animation: pulse .6s ease-in-out infinite alternate; }.listen[aria-pressed=true] .waves i:nth-child(2n) { animation-delay: -.35s; }
+  @keyframes pulse { from { transform: scaleY(.4); } to { transform: scaleY(1); } }
+  .showcase { background: var(--wash); border-block: 1px solid var(--line); padding-block: clamp(2.6rem,4.9vw,5rem); }
+  .show-head,.start { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.2rem; }
+  .show-head h2,.start h2 { font: 500 clamp(2rem,3.7vw,3.5rem)/1.25 var(--display); letter-spacing: -.045em; }
+  .show-head .text-link { flex: none; }.show-intro { color: var(--prose); margin: .75rem 0 1.7rem; }
+  .gallery { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: clamp(.75rem,1.5vw,1.45rem); }
+  .gallery figure { min-width: 0; }.gallery img { width: 100%; aspect-ratio: 16/9; object-fit: cover; background: var(--surface); }
+  .capture-meta,.credit { color: var(--muted); font-size: .78rem; }.capture-meta span { color: var(--accent); }
+  .capture-meta { margin: .7rem 0 .2rem; }.gallery h3 { font: 550 clamp(1.2rem,1.75vw,1.62rem)/1.4 var(--display); }
+  .capture-question { color: var(--prose); font-size: .86rem; line-height: 1.7; margin-top: .35rem; }.credit { margin-top: 1.25rem; }
+  .start { align-items: center; padding-block: clamp(2.8rem,5vw,5.5rem); }
+  .start p:not(.section-kicker) { color: var(--prose); max-width: 39em; margin-top: .7rem; }
+  .start-actions { display: flex; flex-direction: column; align-items: center; gap: .55rem; flex: none; }
+  @media(max-width:900px) {
+    .gallery { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1.55rem 1rem; }
+    .hero-copy { width: 55%; }.hero-shade { background: linear-gradient(90deg,rgba(13,29,24,.92),rgba(17,32,25,.7) 39%,rgba(19,35,28,.08) 72%),linear-gradient(0deg,rgba(15,25,20,.48),transparent 27%); }
+  }
+  @media(max-width:650px) {
+    .hero-content { min-height: clamp(465px,110vw,530px); align-items: flex-end; }
+    .hero-art { height: 74%; object-position: 92% 43%; }
+    .hero-shade { background: linear-gradient(0deg,#1c2d25 0%,#1c2d25 21%,rgba(22,39,30,.91) 39%,rgba(22,39,30,.45) 52%,transparent 74%); }
+    .hero-copy { padding: clamp(10.5rem,32vw,13rem) 0 1.65rem; width: 100%; }
+    .hero h1 { font-size: clamp(2.85rem,8.6vw,3.6rem); margin: .5rem 0 .55rem; }
+    .hero-kicker { font-size: .76rem; }.hero-lead { font-size: .93rem; max-width: 25em; }
+    .hero-actions { margin-top: .95rem; }.hero-actions .button { min-height: 42px; padding-inline: .82rem; font-size: .84rem; }
+    .hero-note { bottom: auto; top: .78rem; right: 0; gap: .12rem; }.hero-note p { font-size: .64rem; }
+    .listen { min-height: 34px; background: rgb(25 39 30 / 88%); }
+    .start { display: block; }.start-actions { flex-direction: row; flex-wrap: wrap; justify-content: start; margin-top: 1.1rem; gap: .8rem; }
+    .show-head { display: block; }.show-head .text-link { display: inline-block; margin-top: .65rem; }.show-intro { margin-bottom: 1.1rem; }
+  }
+  @media(max-width:400px) { .gallery { grid-template-columns: 1fr; } }
 </style>

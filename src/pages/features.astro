@@ -4,9 +4,10 @@ import { Content as SupportedGames } from '../supported-games.md';
 ---
 <Layout title="功能与支持的游戏" description="按游戏和版本查看 StormForge Windows beta 的资产预览、音频、数据分析与场景探索支持范围。">
   <header class="page-head">
-    <p class="eyebrow">CAPABILITIES</p>
-    <h1>功能与支持的游戏</h1>
-    <p class="lead">StormForge 可索引本机游戏资源，按名称搜索，并预览已适配的模型、动作、音频或场景。</p>
+    <p class="eyebrow">游戏支持</p>
+    <h1>你的游戏，可以研究什么？</h1>
+    <p class="lead">找到本机的游戏和版本，查看可以观察哪些画面、收听哪些声音，以及哪些资源能进一步解析与索引。</p>
+    <nav class="jump-links" aria-label="本页目录"><a href="#supported-games">游戏与版本</a><a href="#preview-range">索引与预览</a><a href="#engine-connect">引擎集成</a></nav>
   </header>
 
   <section id="supported-games" class="coverage" aria-labelledby="coverage-title">
@@ -15,21 +16,24 @@ import { Content as SupportedGames } from '../supported-games.md';
   </section>
 
   <div class="prose">
-    <h2>索引与预览</h2>
+    <h2 id="preview-range">索引与预览</h2>
     <p>在「游戏来源」中添加本机安装目录或 Android 安装包，勾选所需的索引。打开资产即可检查模型、材质或可用动作，也可用收藏和集合整理资源。StormForge 以只读方式访问游戏文件。</p>
     <p>场景探索可检查地图的地形、建筑和摆放物件。预览以可辨识、可观察和稳定播放为目标，材质、特效、光照和水面的呈现随游戏而异。依赖关系图面板尚未开放。</p>
-    <h2>引擎集成</h2>
+    <h2 id="engine-connect">引擎集成</h2>
     <p>Agent 可以连接 StormForge MCP 获取 Unity 接收规范和参考实现，预检并重建受支持的资产，再查询回执。SFM 0.99 资源目录保留 SFMB 与 KTX2 依赖文件。Unity 和 Unreal 的导入范围、版本与账号要求见<a href="/docs/#integrations">集成说明</a>。</p>
     <a class="button" href="/download/">下载 StormHub 和 StormForge</a>
   </div>
 </Layout>
 
 <style>
-  .coverage { scroll-margin-top: 1rem; }
-  .coverage h2 { margin-bottom: .5rem; }
+  .coverage { scroll-margin-top: 1rem; border-top: 1px solid var(--line); padding-top: 1.5rem; }
+  .coverage h2 { font: 560 clamp(1.5rem,2.5vw,2.15rem)/1.4 var(--display); margin-bottom: .5rem; }
   .coverage :global(p) { max-width: 70ch; color: var(--prose); }
   .coverage :global(h3) { margin: 2rem 0 .5rem; }
-  .coverage :global(table) { margin: .5rem 0 1.25rem; }
+  .coverage :global(table) { margin: .5rem 0 1.25rem; background: var(--surface); }
+  .coverage :global(th) { background: var(--wash); font-size: .84rem; }
+  .coverage :global(tbody tr:hover) { background: var(--wash); }
+  .coverage :global(p + p) { margin-top: .48rem; }
   .coverage :global(th:first-child) { width: 28%; }
   .coverage :global(th:nth-child(2)) { width: 33%; }
   .coverage :global(td:first-child) { font-weight: 600; }
@@ -37,7 +41,7 @@ import { Content as SupportedGames } from '../supported-games.md';
   @media (max-width: 700px) {
     .coverage :global(thead) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
     .coverage :global(table), .coverage :global(tbody) { display: block; }
-    .coverage :global(tr) { display: grid; gap: .25rem; padding: .85rem 0; border-top: 1px solid var(--line); }
+    .coverage :global(tr) { display: grid; gap: .25rem; padding: .85rem .75rem; border-top: 1px solid var(--line); }
     .coverage :global(td) { border: 0; padding: 0; }
     .coverage :global(td:first-child) { font-size: 1rem; }
     .coverage :global(td code) { display: inline; margin-left: .2rem; }
