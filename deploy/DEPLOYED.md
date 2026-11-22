@@ -1,5 +1,13 @@
 # 官网部署记录
 
+## 2026-11-22　「山门鸣钟」首页上线
+
+北京时间 23:46，正式站从 `3032befc3fa1` 切换到 `d0644b8c65b6`。首页通过原创机关呈现观物、格物、开物、造物。静态包为 1,960,080 字节，SHA-256 为 `d9f47a5ee0facb91598c1681c4b090ac5b26ae9817bc3754e1fd16ba2fd540c1`。[官网首页](https://stormforge.vollagames.com/)
+
+- 公网按桌面 1440 × 1000 和手机 390 × 844 视口检查了首屏。钟声可以播放、停止并自然结束，默认规则在敲钟后 0.45 秒开门，切到「造物」可以改为敲两次。键盘切层、浏览器前进后退、320 像素窄屏和关闭 JavaScript 时的阅读与音频入口均已验证。[机关示例](https://stormforge.vollagames.com/#make)
+- 源站和公网的 24 个静态文件逐项与本地构建一致。网站的 WAV 路径返回 `audio/wav`，支持 HTTP 206。下载页及兼容入口、beta ZIP 和校验文件通过核验，正式与 beta 账户服务健康。Windows 下载快照为 `89a5fd3631d63811b97ff5ae55374650f03c66da7278ab9d2137ec1b8ae82a8e`。[官网下载页](https://stormforge.vollagames.com/download/)
+- 网站上一个版本、切换前的虚拟主机配置和回执保存在 `/var/backups/stormforge-site/20261122T154636Z-d0644b8c65b6-exi2pnmv`。本次 nginx 变更仅为官网钟声设置媒体类型，已通过语法检查并平滑重载。
+
 ## 2026-11-22　游戏支持清单与 Windows beta
 
 官网功能页已发布 27 个具名游戏或版本、3 类通用来源，并单列仅登记的《炉石传说》。Editor 的「帮助 → 支持的游戏」显示每项能力与本机索引状态。官网清单和上游 README 已按全部来源逐行核对。[官网游戏支持清单](https://stormforge.vollagames.com/features/#supported-games)

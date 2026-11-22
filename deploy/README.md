@@ -8,6 +8,8 @@
 
 `/srv/stormforge-site/current` 指向当前网站版本。`deploy/nginx/stormforge.conf` 是模板，生产站点还包含账号和论坛路由。部署前备份并对比线上配置，保留现有站点及其 TLS、代理和 include。
 
+正式站模板为 `/images/philosophy/mountain-bell.wav` 指定了 `audio/wav`。更换虚拟主机时保留这条规则，并用一个字节范围请求核对媒体类型与 206 响应。
+
 正式域名加载本仓库的 `stormforge-site-download-pages.conf` 和发行服务原有的 `stormhub-downloads.conf`。网站把 `/download/`、`/downloads/` 和对应 HTML 地址映射到同一下载页，各入口遵循相同的通道开放状态。产品发布仓库维护签名清单、文件、ZIP 的路由和连接限制区。两个通道共用正式域名。初次接入时，备份线上虚拟主机，在原有发行服务 include 前添加网站 include，完成语法检查后 reload。
 
 ## 本地 / CI 准备
