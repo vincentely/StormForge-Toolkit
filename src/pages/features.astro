@@ -1,7 +1,47 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { Content as SupportedGames } from '../supported-games.md';
 ---
-<Layout title="功能与支持范围" description="了解 StormForge 已实现的索引、预览和 SFM 工作流，以及当前明确的能力边界。">
-<header class="page-head"><p class="eyebrow">CAPABILITIES</p><h1>从资源目录，<br />走近模型与动画。</h1><p class="lead">StormForge 面向本地游戏资源的学习、研究、检查与预览。官网现已开放 Windows x64 测试版下载。</p></header>
-<div class="prose"><h2>只读研究与检查</h2><p>工具不修改游戏资源或客户端，也不提供 Mod 制作或写回功能。预览以可辨识、可观察和稳定播放为目标，不承诺与原客户端画面等价。</p><h2>本地索引与组织</h2><p>管理本地游戏来源，显式启动索引，在资产目录中搜索与浏览。使用收藏和集合整理工作对象；原始游戏文件以只读方式访问。</p><h2>模型与动画预览</h2><p>已存在 Warcraft III 的 MDX、World of Warcraft 的 M2 / WMO / ADT，以及 Heroes of the Storm 的 M3 预览路径。可查看模型、材质、骨骼动画及部分特效；覆盖程度依资源和格式而异。</p><h2>场景查看</h2><p>上游具备 Warcraft III 地图与 WoW 多地块世界预览路径。跨游戏的光照、阴影、水面、天空和后处理仍有未完成项，不承诺与原游戏画面完全一致。</p><h2>SFM 导出与引擎导入</h2><p>已完成预览加载的受支持模型可从 Inspector 导出为 SFM 0.99，并保留关联的 SFMB 与 KTX2 文件。Unity 和 Unreal 插件将完整资源目录导入引擎资产，具体范围见<a href="/docs/#integrations">集成说明</a>。</p><div class="notice"><h3>明确的限制</h3><p>部分材质、特效和格式仍不受支持；依赖关系图面板尚未实现。本文不承诺所有游戏、版本或资源都能预览或导出，也不将未完成的 Runtime 能力列为已发布产品功能。</p></div><a class="button" href="/download/">下载 StormHub 和 StormForge</a></div>
+<Layout title="功能与支持的游戏" description="按游戏和版本查看 StormForge Windows beta 的资产预览、音频、数据分析与场景探索支持范围。">
+  <header class="page-head">
+    <p class="eyebrow">CAPABILITIES</p>
+    <h1>功能与支持的游戏</h1>
+    <p class="lead">StormForge 可索引本机游戏资源，按名称搜索，并预览已适配的模型、动作、音频或场景。</p>
+  </header>
+
+  <section id="supported-games" class="coverage" aria-labelledby="coverage-title">
+    <h2 id="coverage-title">Windows beta 支持清单</h2>
+    <SupportedGames />
+  </section>
+
+  <div class="prose">
+    <h2>索引与预览</h2>
+    <p>在「游戏来源」中添加本机安装目录或 Android 安装包，勾选所需的索引。打开资产即可检查模型、材质或可用动作，也可用收藏和集合整理资源。StormForge 以只读方式访问游戏文件。</p>
+    <p>场景探索可检查地图的地形、建筑和摆放物件。预览以可辨识、可观察和稳定播放为目标，材质、特效、光照和水面的呈现随游戏而异。依赖关系图面板尚未开放。</p>
+    <h2>引擎集成</h2>
+    <p>Agent 可以连接 StormForge MCP 获取 Unity 接收规范和参考实现，预检并重建受支持的资产，再查询回执。SFM 0.99 资源目录保留 SFMB 与 KTX2 依赖文件。Unity 和 Unreal 的导入范围、版本与账号要求见<a href="/docs/#integrations">集成说明</a>。</p>
+    <a class="button" href="/download/">下载 StormHub 和 StormForge</a>
+  </div>
 </Layout>
+
+<style>
+  .coverage { scroll-margin-top: 1rem; }
+  .coverage h2 { margin-bottom: .5rem; }
+  .coverage :global(p) { max-width: 70ch; color: var(--prose); }
+  .coverage :global(h3) { margin: 2rem 0 .5rem; }
+  .coverage :global(table) { margin: .5rem 0 1.25rem; }
+  .coverage :global(th:first-child) { width: 28%; }
+  .coverage :global(th:nth-child(2)) { width: 33%; }
+  .coverage :global(td:first-child) { font-weight: 600; }
+  .coverage :global(td code) { display: block; color: var(--muted); font-weight: 400; }
+  @media (max-width: 700px) {
+    .coverage :global(thead) { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+    .coverage :global(table), .coverage :global(tbody) { display: block; }
+    .coverage :global(tr) { display: grid; gap: .25rem; padding: .85rem 0; border-top: 1px solid var(--line); }
+    .coverage :global(td) { border: 0; padding: 0; }
+    .coverage :global(td:first-child) { font-size: 1rem; }
+    .coverage :global(td code) { display: inline; margin-left: .2rem; }
+    .coverage :global(td:nth-child(3)::before) { content: "其他索引　"; color: var(--muted); }
+    .coverage :global(td:nth-child(4)::before) { content: "场景探索　"; color: var(--muted); }
+  }
+</style>

@@ -97,3 +97,7 @@
 2026-11-21 的 StormHub 图标直接取自已发程序共用的 `assets/hub/stormhub.ico` 的 256 像素 PNG 图层。
 两个产品、两个通道的 ZIP 大小和 SHA-256 已与官方签名通道及独立 Windows 验收回执核对。
 Hub 发布构建来源为 `95b71a2de`，StormForge 为 `94e3cd035`。网站公开数据仅列出发布版本与归档校验信息。
+
+## 游戏支持清单
+
+2026-11-22 的公开清单对应 StormForge 提交 `95d798bcce82c952f10066ee118e4311d26a9f76`。`src/supported-games.md` 同步上游 README 的 Source Coverage 表格，官网功能页直接渲染该文件。具名游戏与通用来源的分类取自 GameRegistry，索引域取自 CatalogIndexerRegistry，场景范围按 World Explorer 的实际入口和启动条件核对。Editor 帮助中的本机来源与索引进度只在用户设备上显示。
