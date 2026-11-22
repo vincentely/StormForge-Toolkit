@@ -1,5 +1,13 @@
 # 官网部署记录
 
+## 2026-11-22　游戏支持清单与 Windows beta
+
+官网功能页已发布 27 个具名游戏或版本、3 类通用来源，并单列仅登记的《炉石传说》。Editor 的「帮助 → 支持的游戏」显示每项能力与本机索引状态。官网清单和上游 README 已按全部来源逐行核对。[官网游戏支持清单](https://stormforge.vollagames.com/features/#supported-games)
+
+StormForge Windows x64 beta 已在当日地址替换为更新序号 `7`，发布源码为 `95d798bcce82c952f10066ee118e4311d26a9f76`。固定地址和日期归档均从公网完整下载，大小为 65,832,545 字节，SHA-256 为 `fdbd0383a910f3b50c22dfee809faba46838cd0d3b57bf1a02ab5fb6a9582de6`。签名清单中的 Editor 与帮助面板实拍使用同一文件。[官网下载页](https://stormforge.vollagames.com/download/)
+
+官网构建为 `3032befc3fa1`，静态包 SHA-256 为 `93f6b6fa367584d878a2950361b20e30c59ac01a8de1a060f3c5d65693863d35`。下载快照为 `89a5fd3631d63811b97ff5ae55374650f03c66da7278ab9d2137ec1b8ae82a8e`。
+
 ## 2026-11-22　StormForge beta 同日更新
 
 StormForge Windows x64 beta 当天的下载包已更新至序号 `6`，含 StormForge MCP 0.99 和 Unity 接收端参考实现。发布源码为 `a10bd4bdbcd1486cecd029870dede15d44e83fc1`。官网的固定地址和日期地址均已从公网完整下载，大小同为 65,832,445 字节，SHA-256 为 `2821beedf7ae8dd04c4d71bc575516bd1ed315099e8d10a210f32bdc2840421e`。[官网下载页](https://stormforge.vollagames.com/download/)
