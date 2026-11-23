@@ -1,5 +1,11 @@
 # 官网部署记录
 
+## 2026-11-23　StormHub beta 安装目录错误提示
+
+Windows beta 的 StormHub 已发布至序号 7。安装目录冲突时，窗口直接列出目标目录和冲突的路径。官网首次安装 ZIP 为 605,120 字节，SHA-256 为 `68fd5a8a01c30a9de2d98865efd65aec31b8e23410035b72392f085ab48b4228`。[下载 StormHub beta](https://stormforge.vollagames.com/downloads/packages/beta/hub/2026-11-23/StormHub-2026-11-23-beta-Windows-x64.zip)
+
+官网下载页的静态回退表已随网站构建 `9b9f389a1fbc` 上线。公网首页、`/download/` 和 `/downloads/` 的内容已与本地构建逐页核对。
+
 ## 2026-11-22　「山门鸣钟」首页上线
 
 北京时间 23:46，正式站从 `3032befc3fa1` 切换到 `d0644b8c65b6`。首页通过原创机关呈现观物、格物、开物、造物。静态包为 1,960,080 字节，SHA-256 为 `d9f47a5ee0facb91598c1681c4b090ac5b26ae9817bc3754e1fd16ba2fd540c1`。[官网首页](https://stormforge.vollagames.com/)
