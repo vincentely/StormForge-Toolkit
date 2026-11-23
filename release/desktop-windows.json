@@ -26,9 +26,9 @@
   {
     "channel": "beta",
     "product": "editor",
-    "version": "2026-11-22",
-    "size_bytes": 65832545,
-    "sha256": "fdbd0383a910f3b50c22dfee809faba46838cd0d3b57bf1a02ab5fb6a9582de6",
-    "sequence": 7
+    "version": "2026-11-23",
+    "size_bytes": 70934042,
+    "sha256": "20823e46f132a196dbe7426abd57ebc05d9baf5fae2065b7f9d220446d004c78",
+    "sequence": 8
   }
 ]
