@@ -18,10 +18,10 @@
   {
     "channel": "beta",
     "product": "hub",
-    "version": "2026-11-21",
-    "size_bytes": 592153,
-    "sha256": "bd92a1bf1bda375b32437469100a3f3ac7508151b7dcbcc8422e5f349e349bd5",
-    "sequence": 6
+    "version": "2026-11-23",
+    "size_bytes": 605120,
+    "sha256": "68fd5a8a01c30a9de2d98865efd65aec31b8e23410035b72392f085ab48b4228",
+    "sequence": 7
   },
   {
     "channel": "beta",
