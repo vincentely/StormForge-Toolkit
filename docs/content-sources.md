@@ -98,6 +98,8 @@
 两个产品、两个通道的 ZIP 大小和 SHA-256 已与官方签名通道及独立 Windows 验收回执核对。
 Hub 发布构建来源为 `95b71a2de`，StormForge 为 `94e3cd035`。网站公开数据仅列出发布版本与归档校验信息。
 
+2026-11-25 的 Windows beta 对应 StormForge 提交 `be131821b64afad1a08798793fe5173ef8f7be89`。Editor 安装目录随附 `Unity/StormForge-Unity-Reference.zip` 和 `Unity/README.md`，StormHub 与官网下载包提供相同文件。参考包 `com.stormforge.unity` 的版本为 `0.99.0`，在 Unity 2022.3.62f3 上验证。接入文档依据上游 `docs/EngineTransferReceiver.md` 和 `tools/distribution/Unity-README.md`。
+
 ## 游戏支持清单
 
 2026-11-22 的公开清单对应 StormForge 提交 `95d798bcce82c952f10066ee118e4311d26a9f76`。`src/supported-games.md` 同步上游 README 的 Source Coverage 表格，官网功能页直接渲染该文件。具名游戏与通用来源的分类取自 GameRegistry，索引域取自 CatalogIndexerRegistry，场景范围按 World Explorer 的实际入口和启动条件核对。Editor 帮助中的本机来源与索引进度只在用户设备上显示。

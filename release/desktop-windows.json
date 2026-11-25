@@ -18,17 +18,17 @@
   {
     "channel": "beta",
     "product": "hub",
-    "version": "2026-11-23",
-    "size_bytes": 605120,
-    "sha256": "68fd5a8a01c30a9de2d98865efd65aec31b8e23410035b72392f085ab48b4228",
-    "sequence": 7
+    "version": "2026-11-25",
+    "size_bytes": 643648,
+    "sha256": "a9c1cdec2933e832ffc4d39c7807d6db7122a5bba77449507fd89f982fb44e3c",
+    "sequence": 8
   },
   {
     "channel": "beta",
     "product": "editor",
-    "version": "2026-11-23",
-    "size_bytes": 70934042,
-    "sha256": "20823e46f132a196dbe7426abd57ebc05d9baf5fae2065b7f9d220446d004c78",
-    "sequence": 8
+    "version": "2026-11-25",
+    "size_bytes": 70971365,
+    "sha256": "67310e319c5e0031eaca1fae429f584e7b6949cd6401e31de209ddd5342757c4",
+    "sequence": 9
   }
 ]
